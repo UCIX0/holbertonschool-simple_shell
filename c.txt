@@ -1,0 +1,355 @@
+Aquí tienes un flujograma detallado de cómo serían las instrucciones y tareas para este proyecto:
+
+1. Inicio
+    1.1. Establecer el entorno
+        - Obtener el entorno actual usando las variables de entorno del sistema
+        - Almacenar el entorno en una estructura de datos apropiada (por ejemplo, un diccionario)
+        --Aquí tienes un detalle adicional del paso 1.1:
+                1.1.1. Obtener las variables de entorno del sistema
+                    - Utilizar la función 'getenv' o acceder a la variable global 'environ' para obtener todas las variables de entorno del sistema en ejecución.
+                1.1.2. Crear una estructura de datos para almacenar las variables de entorno
+                    - Crear una estructura de datos adecuada (por ejemplo, un diccionario o una lista de pares clave-valor) para almacenar las variables de entorno y sus valores.
+                1.1.3. Copiar las variables de entorno a la estructura de datos
+                    - Iterar sobre las variables de entorno obtenidas y almacenar cada par clave-valor en la estructura de datos creada previamente.
+                    - Asegurarse de que cada clave y valor se almacene de manera segura y eficiente (por ejemplo, utilizando duplicación de cadenas o almacenamiento dinámico).
+                1.1.4. Proporcionar funciones o métodos para acceder y modificar las variables de entorno
+                    - Implementar funciones o métodos para realizar operaciones comunes en las variables de entorno, como obtener el valor de una variable, establecer el valor de una variable o eliminar una variable.
+                1.1.5. Ir al siguiente subpaso (1.2. Establecer el PATH)
+                ---Este detalle del paso 1.1 proporciona una descripción más clara de cómo obtener las variables de entorno del sistema, almacenarlas en una estructura de datos adecuada y proporcionar funciones para acceder y modificar estas variables durante la ejecución del programa.
+    1.2. Establecer el PATH
+        - Obtener el valor de la variable de entorno PATH
+        - Almacenar el PATH en una estructura de datos (por ejemplo, una lista de directorios)
+        --Aquí tienes un detalle adicional del paso 1.2:
+            1.2.1. Obtener el valor de la variable de entorno PATH
+                - Utilizar la función 'getenv' o acceder a la estructura de datos de las variables de entorno creada en el paso 1.1 para obtener el valor de la variable PATH.
+            1.2.2. Dividir el valor del PATH en directorios individuales
+                - Separar el valor de la variable PATH utilizando el carácter delimitador adecuado (por ejemplo, ':' en sistemas UNIX, ';' en sistemas Windows).
+            1.2.3. Crear una estructura de datos para almacenar los directorios del PATH
+                - Crear una estructura de datos adecuada (por ejemplo, una lista o un vector) para almacenar los directorios del PATH.
+            1.2.4. Copiar los directorios del PATH a la estructura de datos
+                - Iterar sobre los directorios separados en el paso 1.2.2 y almacenar cada directorio en la estructura de datos creada previamente.
+                - Asegurarse de que cada directorio se almacene de manera segura y eficiente (por ejemplo, utilizando duplicación de cadenas o almacenamiento dinámico).
+            1.2.5. Proporcionar funciones o métodos para acceder y modificar los directorios del PATH
+                - Implementar funciones o métodos para realizar operaciones comunes en los directorios del PATH, como buscar un ejecutable en los directorios del PATH.
+            1.2.6. Ir al siguiente subpaso (1.3. Inicializar el búfer)
+            ---Este detalle del paso 1.2 proporciona una descripción más clara de cómo obtener el valor de la variable PATH, dividirlo en directorios individuales, almacenar estos directorios en una estructura de datos adecuada y proporcionar funciones para acceder y modificar los directorios del PATH durante la ejecución del programa.
+    1.3. Inicializar el búfer
+        - Crear un búfer dinámico para leer la entrada del usuario
+        --Aquí tienes un detalle adicional del paso 1.3:
+            1.3.1. Definir el tamaño inicial del búfer
+                - Establecer un tamaño inicial adecuado para el búfer que permita leer la entrada del usuario de manera eficiente (por ejemplo, 1024 bytes).
+            1.3.2. Crear el búfer dinámico
+                - Utilizar una función de asignación de memoria dinámica, como 'malloc' en C, para reservar espacio en la memoria para el búfer, utilizando el tamaño inicial definido en el paso 1.3.1.
+            1.3.3. Verificar si la asignación de memoria fue exitosa
+                - Comprobar si la función de asignación de memoria dinámica retornó un puntero válido al espacio de memoria asignado.
+                - Si la asignación de memoria falla, manejar el error adecuadamente (por ejemplo, imprimir un mensaje de error y finalizar el programa).
+            1.3.4. Implementar funciones para gestionar el búfer
+                - Crear funciones para realizar operaciones comunes con el búfer, como leer datos en el búfer, redimensionar el búfer si es necesario (por ejemplo, utilizando 'realloc' en C), vaciar el búfer o liberar la memoria del búfer cuando ya no se necesite.
+            1.3.5. Ir al siguiente subpaso (1.4. Inicializar el historial de comandos)
+            --Con este detalle del paso 1.3, se describe cómo crear un búfer dinámico para leer la entrada del usuario, verificar si la asignación de memoria fue exitosa y cómo implementar funciones para gestionar el búfer durante la ejecución del programa.
+    1.4. Inicializar el historial de comandos
+        - Crear una estructura de datos para almacenar el historial de comandos (por ejemplo, una lista de cadenas)
+        - Leer el archivo .simple_shell_history en el directorio $HOME si existe y cargar el contenido en la estructura de datos del historial
+        --Aquí tienes un detalle adicional del paso 1.4:
+            1.4.1. Crear una estructura de datos para almacenar el historial de comandos
+                - Seleccionar una estructura de datos adecuada para almacenar el historial de comandos (por ejemplo, una lista enlazada, un vector o un arreglo dinámico de cadenas).
+                - Inicializar la estructura de datos para que esté lista para almacenar las entradas del historial.
+            1.4.2. Determinar la ubicación del archivo .simple_shell_history
+                - Utilizar la variable de entorno $HOME para determinar la ubicación del directorio del usuario.
+                - Construir la ruta completa del archivo .simple_shell_history en el directorio $HOME (por ejemplo, concatenar la ruta del directorio $HOME con el nombre del archivo .simple_shell_history).
+            1.4.3. Comprobar si el archivo .simple_shell_history existe
+                - Utilizar una función de manejo de archivos, como 'access' en C, para verificar si el archivo .simple_shell_history existe en la ubicación determinada en el paso 1.4.2.
+            1.4.4. Leer el archivo .simple_shell_history si existe
+                - Si el archivo existe, abrirlo en modo de lectura utilizando una función de manejo de archivos, como 'fopen' en C.
+                - Leer el contenido del archivo línea por línea, utilizando una función de lectura de archivos, como 'fgets' en C.
+                - Para cada línea leída, almacenar la cadena en la estructura de datos del historial creada en el paso 1.4.1.
+                - Cerrar el archivo después de leer todo su contenido utilizando una función de manejo de archivos, como 'fclose' en C.
+            1.4.5. Proporcionar funciones para gestionar el historial de comandos
+                - Implementar funciones para realizar operaciones comunes en el historial de comandos, como agregar una entrada al historial, obtener una entrada específica del historial, eliminar una entrada del historial o vaciar todo el historial.
+            1.4.6. Ir al siguiente subpaso (1.5. Configurar el control de señales)
+            --Con este detalle del paso 1.4, se describe cómo crear e inicializar una estructura de datos para almacenar el historial de comandos, leer el archivo .simple_shell_history en el directorio $HOME si existe, cargar el contenido del archivo en la estructura de datos del historial y proporcionar funciones para gestionar el historial de comandos durante la ejecución del programa.
+    1.5. Configurar el control de señales
+        - Establecer el manejo de señales para que el programa no se cierre cuando se reciba una señal de Ctrl+C
+        --Aquí tienes un detalle adicional del paso 1.5:
+            1.5.1. Crear una función para manejar la señal Ctrl+C
+                - Definir una función que se encargará de manejar la señal de interrupción generada por Ctrl+C. Esta función debe evitar que el programa se cierre cuando se reciba esta señal.
+                - Dentro de la función, imprimir un mensaje adecuado, como un salto de línea y el indicador "$", para indicar que el programa continúa en ejecución.
+            1.5.2. Establecer el manejo de señales para Ctrl+C
+                - Utilizar una función de control de señales, como 'signal' en C, para configurar el manejo de la señal SIGINT (Ctrl+C).
+                - Asignar la función creada en el paso 1.5.1 como el manejador de la señal SIGINT. Esto hará que el programa invoque esta función en lugar de finalizar su ejecución cuando se reciba la señal Ctrl+C.
+            1.5.3. Opcional: configurar el manejo de otras señales
+                - Si se desea manejar otras señales además de Ctrl+C, repetir los pasos 1.5.1 y 1.5.2 para cada señal adicional que se quiera manejar.
+            1.5.4. Ir al siguiente subpaso (2. Inicializar variables y estructuras)
+            --Este detalle del paso 1.5 describe cómo crear una función para manejar la señal de interrupción generada por Ctrl+C, establecer el manejo de señales para que el programa no se cierre cuando se reciba dicha señal, y opcionalmente configurar el manejo de otras señales según sea necesario.
+    1.6. Ir al paso 2 (Inicializar variables y estructuras)
+    Con estos subpasos detallados, se puede tener una idea más clara de cómo preparar el entorno, las estructuras de datos y la configuración necesaria antes de comenzar a interactuar con el usuario en el modo interactivo o no interactivo.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2. Inicializar variables y estructuras
+    - Crear variables para almacenar el entorno, el PATH, el búfer, el historial, etc.
+    --Aquí tienes un detalle adicional del paso 2:
+        2.1. Crear variables para almacenar el entorno
+            - Crear una copia del entorno actual del programa utilizando una función como 'environ' en C.
+            - Almacenar la copia del entorno en una variable adecuada (por ejemplo, un puntero a un arreglo de cadenas).
+            --Aquí tienes un detalle adicional del paso 2.1:
+                    2.1.1. Obtener el entorno actual del programa
+                        - Utilizar la variable global 'environ' en C, que es un puntero a un arreglo de cadenas que representa el entorno actual del programa (cada cadena es una variable de entorno en el formato "nombre=valor").
+                    2.1.2. Determinar el tamaño del entorno
+                        - Iterar sobre el arreglo de cadenas 'environ' y contar el número de elementos (variables de entorno) hasta encontrar un puntero nulo, que indica el final del arreglo.
+                    2.1.3. Crear una copia del entorno
+                        - Reservar memoria para un nuevo arreglo de cadenas del mismo tamaño que el entorno actual más un elemento adicional para el puntero nulo.
+                        - Utilizar una función como 'malloc' en C para asignar la memoria necesaria.
+                    2.1.4. Copiar las variables de entorno al nuevo arreglo
+                        - Iterar sobre el arreglo de cadenas 'environ' y, para cada elemento, reservar memoria para una nueva cadena del mismo tamaño que la cadena original (usando 'malloc' o similar).
+                        - Utilizar una función como 'strcpy' en C para copiar el contenido de cada cadena del entorno original al nuevo arreglo.
+                        - Establecer el último elemento del nuevo arreglo como un puntero nulo.
+                    2.1.5. Almacenar la copia del entorno en una variable adecuada
+                        - Crear una variable adecuada (por ejemplo, un puntero a un arreglo de cadenas) para almacenar el puntero al nuevo arreglo de cadenas que representa la copia del entorno.
+                        - Asignar el puntero al nuevo arreglo a esta variable.
+                    2.1.6. Ir al siguiente subpaso (2.2. Crear variables para almacenar el PATH)
+                    --Este detalle del paso 2.1 describe cómo obtener el entorno actual del programa, determinar su tamaño, crear una copia del entorno y sus variables, y almacenar la copia del entorno en una variable adecuada.
+        2.2. Crear variables para almacenar el PATH
+            - Obtener la variable de entorno PATH del entorno copiado en el paso 2.1 utilizando una función como 'getenv' en C.
+            - Almacenar el PATH en una variable adecuada (por ejemplo, una cadena).
+            --Aquí tienes un detalle adicional del paso 2.2:
+                    2.2.1. Obtener la variable de entorno PATH del entorno copiado
+                        - Utilizar la función 'getenv' en C, proporcionando el nombre de la variable de entorno "PATH" y el entorno copiado en el paso 2.1.
+                        - 'getenv' buscará la variable de entorno "PATH" en el entorno copiado y devolverá un puntero a la cadena que contiene su valor (si la variable de entorno existe) o un puntero nulo (si no existe).
+                    2.2.2. Verificar si se obtuvo el valor de la variable de entorno PATH
+                        - Comprobar si el puntero devuelto por 'getenv' es nulo.
+                        - Si es nulo, manejar el error de manera adecuada (por ejemplo, estableciendo un valor predeterminado para el PATH o mostrando un mensaje de error y terminando el programa).
+                    2.2.3. Copiar el valor de la variable de entorno PATH
+                        - Reservar memoria para una nueva cadena del mismo tamaño que la cadena que contiene el valor de la variable de entorno PATH (usando 'malloc' o similar).
+                        - Utilizar una función como 'strcpy' en C para copiar el contenido de la cadena con el valor de la variable de entorno PATH al nuevo espacio de memoria reservado.
+                    2.2.4. Almacenar el PATH en una variable adecuada
+                        - Crear una variable adecuada (por ejemplo, una cadena o un puntero a un arreglo de caracteres) para almacenar el puntero a la nueva cadena que contiene el valor de la variable de entorno PATH.
+                        - Asignar el puntero a la nueva cadena a esta variable.
+                    2.2.5. Ir al siguiente subpaso (2.3. Crear variables para almacenar el búfer)
+                    --Este detalle del paso 2.2 describe cómo obtener la variable de entorno PATH del entorno copiado en el paso 2.1 utilizando la función 'getenv' en C, verificar si se obtuvo el valor de la variable de entorno PATH, copiar el valor de la variable de entorno PATH y almacenar el PATH en una variable adecuada.
+        2.3. Crear variables para almacenar el búfer
+            - Utilizar el búfer dinámico inicializado en el paso 1.3 para leer la entrada del usuario.
+            - Almacenar el puntero al búfer en una variable adecuada (por ejemplo, un puntero a un arreglo de caracteres).
+            --Aquí tienes un detalle adicional del paso 2.3:
+                    2.3.1. Reservar memoria para el búfer dinámico
+                        - Utilizar una función como 'malloc' en C para asignar la memoria necesaria para el búfer dinámico.
+                        - Especificar el tamaño inicial del búfer, que puede ser un valor fijo (por ejemplo, 1024 bytes) o basado en algún criterio, como el tamaño de la entrada esperada.
+                    2.3.2. Verificar si se asignó correctamente la memoria para el búfer
+                        - Comprobar si el puntero devuelto por 'malloc' es nulo.
+                        - Si es nulo, manejar el error de manera adecuada (por ejemplo, mostrando un mensaje de error y terminando el programa).
+                    2.3.3. Inicializar el contenido del búfer
+                        - Establecer todos los elementos del búfer en un valor predeterminado, como 0 o '\0', utilizando una función como 'memset' en C.
+                    2.3.4. Almacenar el puntero al búfer en una variable adecuada
+                        - Crear una variable adecuada (por ejemplo, un puntero a un arreglo de caracteres) para almacenar el puntero al búfer dinámico.
+                        - Asignar el puntero al búfer dinámico a esta variable.
+                    2.3.5. Ir al siguiente subpaso (2.4. Crear variables para almacenar el historial)
+                    --Este detalle del paso 2.3 describe cómo reservar memoria para el búfer dinámico, verificar si se asignó correctamente la memoria para el búfer, inicializar el contenido del búfer, y almacenar el puntero al búfer en una variable adecuada.
+        2.4. Crear variables para almacenar el historial
+            - Utilizar la estructura de datos creada e inicializada en el paso 1.4 para almacenar el historial de comandos.
+            - Almacenar un puntero a la estructura de datos del historial en una variable adecuada (por ejemplo, un puntero a una lista enlazada, un vector o un arreglo dinámico de cadenas).
+            --Aquí tienes un detalle adicional del paso 2.4:
+                    2.4.1. Crear la estructura de datos para el historial
+                        - Utilizar la estructura de datos creada e inicializada en el paso 1.4, que puede ser una lista enlazada, un vector o un arreglo dinámico de cadenas.
+                    2.4.2. Cargar el historial desde el archivo .simple_shell_history si existe
+                        - Leer el archivo .simple_shell_history en el directorio $HOME.
+                        - Por cada línea del archivo, agregar la línea como un elemento en la estructura de datos del historial.
+                    2.4.3. Verificar si se creó e inicializó correctamente la estructura de datos del historial
+                        - Comprobar si la estructura de datos del historial está vacía o contiene elementos leídos desde el archivo .simple_shell_history (si existía).
+                        - Si la estructura de datos del historial no está vacía, agregar el elemento actual al final del historial.
+                    2.4.4. Almacenar el puntero a la estructura de datos del historial en una variable adecuada
+                        - Crear una variable adecuada (por ejemplo, un puntero a una lista enlazada, un vector o un arreglo dinámico de cadenas) para almacenar el puntero a la estructura de datos del historial.
+                        - Asignar el puntero a la estructura de datos del historial a esta variable.
+                    2.4.5. Ir al siguiente subpaso (2.5. Crear variables para almacenar el control de señales)
+                    --Este detalle del paso 2.4 describe cómo crear la estructura de datos para el historial, cargar el historial desde el archivo .simple_shell_history si existe, verificar si se creó e inicializó correctamente la estructura de datos del historial, y almacenar el puntero a la estructura de datos del historial en una variable adecuada.
+        2.5. Crear variables para almacenar información adicional
+            - Dependiendo de las necesidades específicas del programa, puede ser necesario crear variables adicionales para almacenar información relacionada con el proceso, la ejecución de comandos, el manejo de errores, etc.
+            --Aquí tienes un detalle adicional del paso 2.5:
+                    2.5.1. Crear variables para almacenar información sobre el proceso
+                        - Por ejemplo, crear variables para almacenar el ID del proceso (PID) y el ID del proceso padre (PPID).
+                        - Estas variables pueden ser útiles para manejar aspectos relacionados con la ejecución de comandos y el control de procesos.
+                    2.5.2. Crear variables para almacenar información sobre la ejecución de comandos
+                        - Por ejemplo, crear variables para almacenar el estado de salida de los comandos ejecutados (exit status) y el estado de error (error status).
+                        - Estas variables pueden ser útiles para mostrar mensajes de error y proporcionar información al usuario sobre el resultado de la ejecución de comandos.
+                    2.5.3. Crear variables para almacenar información sobre el manejo de errores
+                        - Por ejemplo, crear variables para almacenar información sobre errores específicos, como errores de sintaxis, errores en la ejecución de comandos, errores en el manejo de señales, etc.
+                        - Estas variables pueden ser útiles para proporcionar información detallada al usuario sobre los errores que ocurrieron durante la ejecución del programa.
+                    2.5.4. Crear variables para almacenar información adicional según las necesidades específicas del programa
+                        - Dependiendo de las características y funcionalidades adicionales que se deseen implementar, puede ser necesario crear variables adicionales para almacenar información relacionada.
+                        - Estas variables pueden ser útiles para optimizar el rendimiento, mejorar la experiencia del usuario o implementar funcionalidades avanzadas.
+                    2.5.5. Ir al siguiente paso (3. Determinar si el modo es interactivo o no interactivo)
+                    --Este detalle del paso 2.5 describe cómo crear variables para almacenar información adicional relacionada con el proceso, la ejecución de comandos, el manejo de errores y otras necesidades específicas del programa. Estas variables pueden ser útiles para optimizar el rendimiento, mejorar la experiencia del usuario o implementar funcionalidades avanzadas.
+        2.6. Ir al siguiente paso (3. Determinar si el modo es interactivo o no interactivo)
+        --Este detalle del paso 2 describe cómo crear e inicializar las variables necesarias para almacenar el entorno, el PATH, el búfer y el historial de comandos, así como cualquier otra variable adicional que pueda ser necesaria en función de las necesidades específicas del programa.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+3. Determinar si el modo es interactivo o no interactivo
+    - Si es interactivo, ir al paso 4
+    - Si no es interactivo, ir al paso 18
+    --Aquí tienes un detalle adicional del paso 3:
+        3.1. Verificar si hay argumentos pasados al programa
+            - Revisar los argumentos pasados al programa (argc y argv) para determinar si hay un archivo de script u otro argumento relacionado con el modo no interactivo.
+            --Aquí tienes un detalle adicional del paso 3.1:
+                3.1. Verificar si hay argumentos pasados al programa
+                    3.1.1. Analizar los argumentos pasados al programa
+                        - Utilizar los parámetros 'argc' y 'argv' proporcionados por la función 'main' en C para acceder a los argumentos.
+                    3.1.2. Iterar sobre los argumentos
+                        - Recorrer los argumentos (desde 'argv[1]' hasta 'argv[argc-1]') y verificar si alguno de ellos es un archivo de script u otro argumento relacionado con el modo no interactivo.
+                    3.1.3. Verificar si se encontró un archivo de script o un argumento relacionado con el modo no interactivo
+                        - Si se encuentra un archivo de script o un argumento relacionado con el modo no interactivo, establecer una variable (por ejemplo, un valor booleano) para indicar que se debe utilizar el modo no interactivo.
+                        - Si no se encuentra ningún archivo de script ni argumento relacionado con el modo no interactivo, continuar con el paso 3.2 (Determinar si el programa se ejecuta en un terminal).
+                    --Este detalle del paso 3.1 describe cómo analizar los argumentos pasados al programa, iterar sobre ellos para verificar si hay un archivo de script u otro argumento relacionado con el modo no interactivo, y establecer una variable para indicar si se debe utilizar el modo no interactivo.
+        3.2. Determinar si el programa se ejecuta en un terminal
+            - Utilizar una función como 'isatty' en C para verificar si la entrada estándar (stdin) está conectada a un terminal.
+            --Aquí tienes un detalle adicional del paso 3.2:
+                    3.2.1. Llamar a la función 'isatty'
+                        - Utilizar la función 'isatty' en C con el descriptor de archivo de la entrada estándar (stdin), generalmente representado por el número 0 (cero).
+                    3.2.2. Verificar el resultado de 'isatty'
+                        - Si 'isatty' devuelve un valor distinto de 0 (verdadero), esto indica que la entrada estándar está conectada a un terminal y el programa se está ejecutando en modo interactivo.
+                        - Si 'isatty' devuelve 0 (falso), esto indica que la entrada estándar no está conectada a un terminal y el programa debe ejecutarse en modo no interactivo (si no se encontró un archivo de script o un argumento relacionado en el paso 3.1).
+                    3.2.3. Establecer el modo de ejecución según el resultado de 'isatty'
+                        - Si 'isatty' devuelve un valor distinto de 0, establecer el modo de ejecución como interactivo.
+                        - Si 'isatty' devuelve 0 y se encontró un archivo de script o un argumento relacionado en el paso 3.1, establecer el modo de ejecución como no interactivo.
+                    --Este detalle del paso 3.2 describe cómo utilizar la función 'isatty' para determinar si el programa se ejecuta en un terminal y establecer el modo de ejecución como interactivo o no interactivo según el resultado de 'isatty' y la presencia de un archivo de script u otro argumento relacionado con el modo no interactivo.
+        3.3. Establecer el modo de ejecución
+            3.3.1. Si se detecta un archivo de script o un argumento relacionado con el modo no interactivo, establecer el modo como no interactivo
+                - Almacenar esta información en una variable adecuada (por ejemplo, un valor booleano).
+                - Ir al paso 18 (Modo no interactivo).
+            3.3.2. Si la entrada estándar está conectada a un terminal, establecer el modo como interactivo
+                - Almacenar esta información en una variable adecuada (por ejemplo, un valor booleano).
+                - Ir al paso 4 (Modo interactivo).
+            --Aquí tienes un detalle adicional del paso 3.3:
+                    3.3.1. Si se detecta un archivo de script o un argumento relacionado con el modo no interactivo, establecer el modo como no interactivo
+                        - Utilizar una variable adecuada (por ejemplo, un valor booleano) para almacenar la información sobre el modo de ejecución.
+                        - Establecer la variable en un valor que indique que el modo de ejecución es no interactivo (por ejemplo, "true" si es un valor booleano).
+                        - Ir al paso 18 (Modo no interactivo).
+                    3.3.2. Si la entrada estándar está conectada a un terminal, establecer el modo como interactivo
+                        - Utilizar una variable adecuada (por ejemplo, un valor booleano) para almacenar la información sobre el modo de ejecución.
+                        - Establecer la variable en un valor que indique que el modo de ejecución es interactivo (por ejemplo, "false" si es un valor booleano).
+                        - Continuar con el paso 4 (Modo interactivo).
+                    --Este detalle del paso 3.3 describe cómo establecer el modo de ejecución en función de la detección de un archivo de script o un argumento relacionado con el modo no interactivo y de si la entrada estándar está conectada a un terminal. Se utilizan variables adecuadas (por ejemplo, valores booleanos) para almacenar la información sobre el modo de ejecución y se establece el flujo del programa según el modo seleccionado.
+        --Este detalle del paso 3 describe cómo verificar si hay argumentos pasados al programa, determinar si el programa se ejecuta en un terminal, y establecer el modo de ejecución como interactivo o no interactivo según corresponda.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+4. Modo interactivo
+    4.1. Imprimir el indicador "$"
+        - Utilizar una función como 'printf' en C para mostrar el indicador "$" en la pantalla.
+        --A continuación, se detallan los subpasos:
+            4.1.1. Preparar el indicador de la línea de comandos
+                - Establecer una cadena que contenga el símbolo "$" seguido de un espacio para mostrar el indicador.
+            4.1.2. Utilizar una función de salida
+                - Usar la función 'printf' en C u otra función similar para escribir el indicador en la pantalla, mostrándolo al usuario antes de aceptar la entrada.
+            4.1.3. Asegurar que el indicador se muestre correctamente
+                - Llamar a la función 'fflush' en C para asegurar que el indicador se muestre correctamente en la pantalla antes de recibir la entrada del usuario. Esto garantiza que la salida esté actualizada y el indicador sea visible incluso si no se ha alcanzado un punto de retorno automático.
+    4.2. Leer la línea de comando del usuario
+        4.2.1. Utilizar un búfer para leer muchos caracteres a la vez
+            - Utilizar la función 'getline' en C, que lee la entrada del usuario y almacena el contenido en el búfer.
+        --A continuación, se detallan los subpasos:
+            4.2.1.1. Preparar el búfer
+                - Asegurar que el búfer esté vacío y listo para recibir la entrada del usuario. Si es necesario, limpiar o reasignar el búfer para almacenar la nueva entrada.
+            4.2.1.2. Leer la entrada del usuario
+                - Utilizar la función 'getline' en C para leer la entrada del usuario desde la entrada estándar (stdin). La función 'getline' leerá caracteres hasta que se encuentre una nueva línea ('\n') o se alcance el final del archivo (EOF).
+            4.2.1.3. Almacenar la entrada en el búfer
+                - La función 'getline' almacena automáticamente la entrada del usuario en el búfer proporcionado, incluyendo el carácter de nueva línea ('\n').
+            4.2.1.4. Ajustar el tamaño del búfer si es necesario
+                - La función 'getline' ajustará el tamaño del búfer de forma dinámica si la entrada del usuario es más larga que el tamaño del búfer actual. Esto garantiza que la entrada completa del usuario se almacene en el búfer sin pérdida de información.
+    4.3. Verificar si se ingresó Ctrl+D (fin de archivo)
+        4.3.1. Comprobar el valor devuelto por 'getline'
+            - Después de que la función 'getline' haya leído la entrada del usuario, verificar el valor que devuelve. Si 'getline' devuelve -1, esto indica que se ha encontrado el final del archivo (EOF) o que se ha ingresado Ctrl+D.
+        4.3.2. Si se detecta Ctrl+D, salir de la shell
+            4.3.2.1. Verificar si es necesario guardar el historial
+                - Antes de salir de la shell, comprobar si el historial de comandos necesita ser guardado en un archivo, según las especificaciones del proyecto.
+            4.3.2.2. Guardar el historial si es necesario
+                - Si se requiere guardar el historial, escribir el contenido del historial en un archivo, como se especifica en el proyecto.
+            4.3.2.3. Liberar recursos
+                - Antes de terminar el programa, asegurarse de liberar todos los recursos utilizados, como el búfer, las estructuras de datos del historial y cualquier otra estructura dinámica que se haya utilizado.
+            4.3.2.4. Terminar el programa
+                - Una vez que se hayan liberado los recursos y se haya guardado el historial, terminar el programa utilizando una función como 'exit' en C.
+    4.4. Verificar si se ingresó Ctrl+C
+        - El manejo de Ctrl+C se configuró en el paso 1.5 (Control de señales), por lo que el programa no se cerrará automáticamente.
+        - Si se detecta Ctrl+C, el programa simplemente imprimirá un nuevo indicador "$" y volverá al paso 4.1.
+        --Aquí tienes un detalle adicional
+            4.4.1. Recordar que el manejo de señales se configuró en el paso 1.5
+                - En el paso 1.5, se estableció el manejo de la señal SIGINT (Ctrl+C) para evitar que el programa se cierre automáticamente cuando se reciba esta señal. En lugar de eso, se ejecutará una función personalizada que maneja la señal.
+            4.4.2. Función personalizada para manejar Ctrl+C
+                - La función personalizada que maneja la señal SIGINT no detendrá el programa. En su lugar, realizará las siguientes acciones:
+                    4.4.2.1. Limpiar la entrada actual del usuario
+                        - Si el usuario estaba escribiendo un comando, borrar la entrada para que no se procese más.
+                    4.4.2.2. Imprimir un mensaje o una nueva línea
+                        - Imprimir un mensaje, si es necesario, o simplemente una nueva línea para que el indicador "$" aparezca en una nueva línea.
+            4.4.3. Volver al paso 4.1
+                - Después de que la función personalizada haya manejado la señal SIGINT, el programa volverá al paso 4.1, que implica imprimir el indicador "$" y esperar una nueva entrada del usuario.
+    4.5. Tokenizar la línea de comando
+        4.5.1. Separar los comandos y argumentos
+            - Utilizar una función o algoritmo adecuado (por ejemplo, 'strtok' en C o alguna otra función personalizada) para dividir la cadena en tokens, tomando en cuenta los delimitadores, como espacios y tabulaciones. Estos tokens representarán comandos y sus argumentos.
+            - Almacenar estos tokens en una estructura de datos adecuada, como una lista o un arreglo, para su posterior procesamiento.
+        4.5.2. Identificar los separadores de comandos (";") y operadores lógicos ("&&", "||")
+            - A medida que se procesan los tokens, analizar cada token para identificar si corresponde a un separador de comandos (";") u operadores lógicos ("&&", "||").
+            - Al encontrar un separador de comandos o un operador lógico, tomar nota de su posición en la estructura de datos que contiene los tokens y de qué tipo de separador u operador es.
+            - Esta información será útil al momento de ejecutar los comandos en los pasos siguientes, ya que permitirá dividir la línea de comando en comandos individuales y establecer las condiciones para su ejecución basadas en los operadores lógicos.
+    4.6. Verificar si se ingresaron comentarios (#)
+        4.6.1. Buscar el carácter '#' en la línea de comando
+            - Recorrer la línea de comando en busca del carácter '#', que indica el inicio de un comentario.
+        4.6.2. Eliminar el comentario y el contenido posterior a él
+            - Si se encuentra el carácter '#', eliminar el comentario y cualquier contenido que siga a este carácter en la línea de comando.
+            - Esto se puede lograr cambiando el tamaño de la cadena o reemplazando el carácter '#' y los caracteres posteriores con el carácter nulo ('\0'), lo que efectivamente truncará la línea de comando en ese punto.
+            - De esta manera, se ignorarán los comentarios al procesar los comandos y argumentos restantes en la línea de comando.
+    4.7. Ejecutar el comando
+        4.7.1. Determinar si el comando es un built-in
+            - Comparar el comando con la lista de comandos built-in (por ejemplo, exit, env, setenv, unsetenv, cd, alias, history) para determinar si es uno de ellos.
+        4.7.2. Si el comando es un built-in, ir al paso 5
+            - Si se determina que el comando es un built-in, proceder al paso 5 para ejecutarlo y realizar las acciones correspondientes según el comando específico.
+        4.7.3. Si no es un built-in, ir al paso 6
+            - Si el comando no coincide con ninguno de los comandos built-in, se asume que es un comando externo.
+            - Proceder al paso 6 para ejecutar el comando externo, lo que implica buscarlo en el PATH, crear un proceso hijo y ejecutarlo en ese proceso hijo.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+5. Comandos built-in
+    5.1. Identificar el comando built-in
+        - A partir de la lista de comandos built-in (exit, env, setenv, unsetenv, cd, alias, history), determinar cuál es el comando que se ingresó y prepararse para ejecutar la función correspondiente.
+        --Aquí se detalla el paso
+            - A partir de la tokenización realizada en el paso 4.5, analizar el primer token (que correspondería al comando ingresado por el usuario).
+            - Comparar el comando con la lista de comandos built-in (exit, env, setenv, unsetenv, cd, alias, history) utilizando una función como 'strcmp' en C o similar, para determinar si el comando ingresado coincide con alguno de los comandos built-in.
+            - Si se encuentra una coincidencia, tomar nota del comando built-in específico que se ingresó y prepararse para ejecutar la función correspondiente en el siguiente paso (5.2. Ejecutar el comando built-in).
+            - Si no se encuentra una coincidencia, continuar con el proceso de ejecución de comandos externos en el paso 6.
+    5.2. Ejecutar el comando built-in
+        - Dependiendo del comando built-in identificado en el paso 5.1, realizar la acción correspondiente:
+            - exit: Salir de la shell, liberar recursos (como el búfer, las estructuras de datos y las variables utilizadas) y guardar el historial en el archivo .simple_shell_history en el directorio $HOME.
+            - env: Iterar a través de las variables de entorno almacenadas en la copia del entorno creada en el paso 2.1 y mostrarlas en la salida estándar.
+            - setenv: Aceptar un par nombre-valor como argumentos y establecer o modificar una variable de entorno en la copia del entorno almacenada en el paso 2.1.
+            - unsetenv: Aceptar el nombre de una variable de entorno como argumento y eliminar dicha variable de la copia del entorno almacenada en el paso 2.1.
+            - cd: Aceptar un argumento que indique el directorio de destino y cambiar el directorio de trabajo actual utilizando una función como 'chdir' en C.
+            - alias: Aceptar un argumento que indique el nombre del alias y el comando asociado, y almacenar esa información en una estructura de datos (por ejemplo, un mapa o un diccionario) para su uso futuro.
+            - history: Mostrar el historial de comandos ejecutados almacenado en la estructura de datos creada en el paso 1.4.
+        --En general, los comandos built-in se ejecutan directamente en el proceso principal de la shell sin crear procesos hijos. Esto significa que no se requiere la creación de procesos adicionales para llevar a cabo las acciones de los comandos built-in.
+    5.3. Volver al paso 4.1
+        - Después de ejecutar el comando built-in y completar la acción correspondiente, la shell debe continuar en modo interactivo esperando nuevas entradas del usuario.
+        - Para hacer esto, volver al paso 4.1, donde se muestra el indicador "$" en la pantalla, indicando que la shell está lista para recibir el siguiente comando del usuario.
+        - La shell seguirá en este ciclo, leyendo la entrada del usuario, procesando y ejecutando comandos, hasta que se reciba una señal para salir de la shell (por ejemplo, al ingresar el comando built-in "exit" o al detectar Ctrl+D).
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+6. Comandos externos
+    6.1. Verificar si el comando existe en el PATH
+        - Si existe, continuar
+        - Si no existe, imprimir un mensaje de error y volver al paso 4.1
+    6.2. No llamar a fork si el comando no existe
+    6.3. Crear un proceso hijo usando fork()
+    6.4. Ejecutar el comando en el proceso hijo usando exec()
+    6.5. Esperar a que el proceso hijo termine usando wait()
+    6.6. Volver al paso 4.1
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+7. Modo no interactivo
+    7.1. Leer el script de entrada
+    7.2. Ejecutar el script siguiendo los pasos 4.2 a 6.6 según corresponda
+    7.3. Salir de la shell
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+8. Salir
+    8.1. Guardar el historial en .simple_shell_history en el directorio $HOME
+    8.2. Liberar recursos y finalizar
