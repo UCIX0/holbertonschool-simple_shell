@@ -1,125 +1,11 @@
 Aquí tienes un flujograma detallado de cómo serían las instrucciones y tareas para este proyecto:
 
 1. Inicio
-	1.1. Establecer el entorno
-		- Obtener el entorno actual usando las variables de entorno del sistema
-		- Almacenar el entorno en una estructura de datos apropiada (por ejemplo, un diccionario)
-		--Aquí tienes un detalle adicional del paso 1.1:
-
-				1.1.1. Obtener las variables de entorno del sistema
-					- Utilizar la función 'getenv' o acceder a la variable global 'environ' para obtener todas las variables de entorno del sistema en ejecución.
-
-				1.1.2. Crear una estructura de datos para almacenar las variables de entorno
-					- Crear una estructura de datos adecuada (por ejemplo, un diccionario o una lista de pares clave-valor) para almacenar las variables de entorno y sus valores.
-
-				1.1.3. Copiar las variables de entorno a la estructura de datos
-					- Iterar sobre las variables de entorno obtenidas y almacenar cada par clave-valor en la estructura de datos creada previamente.
-					- Asegurarse de que cada clave y valor se almacene de manera segura y eficiente (por ejemplo, utilizando duplicación de cadenas o almacenamiento dinámico).
-
-				1.1.4. Proporcionar funciones o métodos para acceder y modificar las variables de entorno
-					- Implementar funciones o métodos para realizar operaciones comunes en las variables de entorno, como obtener el valor de una variable, establecer el valor de una variable o eliminar una variable.
-
-				1.1.5. Ir al siguiente subpaso (1.2. Establecer el PATH)
-
-				---Este detalle del paso 1.1 proporciona una descripción más clara de cómo obtener las variables de entorno del sistema, almacenarlas en una estructura de datos adecuada y proporcionar funciones para acceder y modificar estas variables durante la ejecución del programa.
-
-	1.2. Establecer el PATH
-		- Obtener el valor de la variable de entorno PATH
-		- Almacenar el PATH en una estructura de datos (por ejemplo, una lista de directorios)
-		--Aquí tienes un detalle adicional del paso 1.2:
-
-			1.2.1. Obtener el valor de la variable de entorno PATH
-				- Utilizar la función 'getenv' o acceder a la estructura de datos de las variables de entorno creada en el paso 1.1 para obtener el valor de la variable PATH.
-
-			1.2.2. Dividir el valor del PATH en directorios individuales
-				- Separar el valor de la variable PATH utilizando el carácter delimitador adecuado (por ejemplo, ':' en sistemas UNIX, ';' en sistemas Windows).
-
-			1.2.3. Crear una estructura de datos para almacenar los directorios del PATH
-				- Crear una estructura de datos adecuada (por ejemplo, una lista o un vector) para almacenar los directorios del PATH.
-
-			1.2.4. Copiar los directorios del PATH a la estructura de datos
-				- Iterar sobre los directorios separados en el paso 1.2.2 y almacenar cada directorio en la estructura de datos creada previamente.
-				- Asegurarse de que cada directorio se almacene de manera segura y eficiente (por ejemplo, utilizando duplicación de cadenas o almacenamiento dinámico).
-
-			1.2.5. Proporcionar funciones o métodos para acceder y modificar los directorios del PATH
-				- Implementar funciones o métodos para realizar operaciones comunes en los directorios del PATH, como buscar un ejecutable en los directorios del PATH.
-			1.2.6. Ir al siguiente subpaso (1.3. Inicializar el búfer)
-
-			---Este detalle del paso 1.2 proporciona una descripción más clara de cómo obtener el valor de la variable PATH, dividirlo en directorios individuales, almacenar estos directorios en una estructura de datos adecuada y proporcionar funciones para acceder y modificar los directorios del PATH durante la ejecución del programa.
-
-	1.3. Inicializar el búfer
-		- Crear un búfer dinámico para leer la entrada del usuario
-		--Aquí tienes un detalle adicional del paso 1.3:
-
-			1.3.1. Definir el tamaño inicial del búfer
-				- Establecer un tamaño inicial adecuado para el búfer que permita leer la entrada del usuario de manera eficiente (por ejemplo, 1024 bytes).
-
-			1.3.2. Crear el búfer dinámico
-				- Utilizar una función de asignación de memoria dinámica, como 'malloc' en C, para reservar espacio en la memoria para el búfer, utilizando el tamaño inicial definido en el paso 1.3.1.
-
-			1.3.3. Verificar si la asignación de memoria fue exitosa
-				- Comprobar si la función de asignación de memoria dinámica retornó un puntero válido al espacio de memoria asignado.
-				- Si la asignación de memoria falla, manejar el error adecuadamente (por ejemplo, imprimir un mensaje de error y finalizar el programa).
-
-			1.3.4. Implementar funciones para gestionar el búfer
-				- Crear funciones para realizar operaciones comunes con el búfer, como leer datos en el búfer, redimensionar el búfer si es necesario (por ejemplo, utilizando 'realloc' en C), vaciar el búfer o liberar la memoria del búfer cuando ya no se necesite.
-
-			1.3.5. Ir al siguiente subpaso (1.4. Inicializar el historial de comandos)
-
-			--Con este detalle del paso 1.3, se describe cómo crear un búfer dinámico para leer la entrada del usuario, verificar si la asignación de memoria fue exitosa y cómo implementar funciones para gestionar el búfer durante la ejecución del programa.
-
-	1.4. Inicializar el historial de comandos
-		- Crear una estructura de datos para almacenar el historial de comandos (por ejemplo, una lista de cadenas)
-		- Leer el archivo .simple_shell_history en el directorio $HOME si existe y cargar el contenido en la estructura de datos del historial
-		--Aquí tienes un detalle adicional del paso 1.4:
-
-			1.4.1. Crear una estructura de datos para almacenar el historial de comandos
-				- Seleccionar una estructura de datos adecuada para almacenar el historial de comandos (por ejemplo, una lista enlazada, un vector o un arreglo dinámico de cadenas).
-				- Inicializar la estructura de datos para que esté lista para almacenar las entradas del historial.
-
-			1.4.2. Determinar la ubicación del archivo .simple_shell_history
-				- Utilizar la variable de entorno $HOME para determinar la ubicación del directorio del usuario.
-				- Construir la ruta completa del archivo .simple_shell_history en el directorio $HOME (por ejemplo, concatenar la ruta del directorio $HOME con el nombre del archivo .simple_shell_history).
-
-			1.4.3. Comprobar si el archivo .simple_shell_history existe
-				- Utilizar una función de manejo de archivos, como 'access' en C, para verificar si el archivo .simple_shell_history existe en la ubicación determinada en el paso 1.4.2.
-
-			1.4.4. Leer el archivo .simple_shell_history si existe
-				- Si el archivo existe, abrirlo en modo de lectura utilizando una función de manejo de archivos, como 'fopen' en C.
-				- Leer el contenido del archivo línea por línea, utilizando una función de lectura de archivos, como 'fgets' en C.
-				- Para cada línea leída, almacenar la cadena en la estructura de datos del historial creada en el paso 1.4.1.
-				- Cerrar el archivo después de leer todo su contenido utilizando una función de manejo de archivos, como 'fclose' en C.
-
-			1.4.5. Proporcionar funciones para gestionar el historial de comandos
-				- Implementar funciones para realizar operaciones comunes en el historial de comandos, como agregar una entrada al historial, obtener una entrada específica del historial, eliminar una entrada del historial o vaciar todo el historial.
-
-			1.4.6. Ir al siguiente subpaso (1.5. Configurar el control de señales)
-
-			--Con este detalle del paso 1.4, se describe cómo crear e inicializar una estructura de datos para almacenar el historial de comandos, leer el archivo .simple_shell_history en el directorio $HOME si existe, cargar el contenido del archivo en la estructura de datos del historial y proporcionar funciones para gestionar el historial de comandos durante la ejecución del programa.
-
-	1.5. Configurar el control de señales
-		- Establecer el manejo de señales para que el programa no se cierre cuando se reciba una señal de Ctrl+C
-		--Aquí tienes un detalle adicional del paso 1.5:
-
-			1.5.1. Crear una función para manejar la señal Ctrl+C
-				- Definir una función que se encargará de manejar la señal de interrupción generada por Ctrl+C. Esta función debe evitar que el programa se cierre cuando se reciba esta señal.
-				- Dentro de la función, imprimir un mensaje adecuado, como un salto de línea y el indicador "$", para indicar que el programa continúa en ejecución.
-
-			1.5.2. Establecer el manejo de señales para Ctrl+C
-				- Utilizar una función de control de señales, como 'signal' en C, para configurar el manejo de la señal SIGINT (Ctrl+C).
-				- Asignar la función creada en el paso 1.5.1 como el manejador de la señal SIGINT. Esto hará que el programa invoque esta función en lugar de finalizar su ejecución cuando se reciba la señal Ctrl+C.
-
-			1.5.3. Opcional: configurar el manejo de otras señales
-				- Si se desea manejar otras señales además de Ctrl+C, repetir los pasos 1.5.1 y 1.5.2 para cada señal adicional que se quiera manejar.
-
-			1.5.4. Ir al siguiente subpaso (2. Inicializar variables y estructuras)
-
-			--Este detalle del paso 1.5 describe cómo crear una función para manejar la señal de interrupción generada por Ctrl+C, establecer el manejo de señales para que el programa no se cierre cuando se reciba dicha señal, y opcionalmente configurar el manejo de otras señales según sea necesario.
-
-	1.6. Ir al paso 2 (Inicializar variables y estructuras)
-
-	--Con estos subpasos detallados, se puede tener una idea más clara de cómo preparar el entorno, las estructuras de datos y la configuración necesaria antes de comenzar a interactuar con el usuario en el modo interactivo o no interactivo.
-
+	-Crear el main.h
+	-Cargar las librerías
+	-Crear macros
+	-Definir las constates como por ejemplo el tamaño inicial del buffer
+	-Definir las estructura
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -130,103 +16,121 @@ Aquí tienes un flujograma detallado de cómo serían las instrucciones y tareas
 	--Aquí tienes un detalle adicional del paso 2:
 
 		2.1. Crear variables para almacenar el entorno
-			- Crear una copia del entorno actual del programa utilizando una función como 'environ' en C.
-			- Almacenar la copia del entorno en una variable adecuada (por ejemplo, un puntero a un arreglo de cadenas).
+			2.1.1. Obtener el entorno actual del programa
+				- Utilizar la variable global 'environ' en C, que es un puntero a un arreglo de cadenas que representa el entorno actual del programa (cada cadena es una variable de entorno en el formato "nombre=valor").
 
-			--Aquí tienes un detalle adicional del paso 2.1:
+			2.1.2. Determinar el tamaño del entorno
+				- Iterar sobre el arreglo de cadenas 'environ' y contar el número de elementos (variables de entorno) hasta encontrar un puntero nulo, que indica el final del arreglo.
 
-					2.1.1. Obtener el entorno actual del programa
-						- Utilizar la variable global 'environ' en C, que es un puntero a un arreglo de cadenas que representa el entorno actual del programa (cada cadena es una variable de entorno en el formato "nombre=valor").
+			2.1.3. Crear una copia del entorno
+				- Reservar memoria para un nuevo arreglo de cadenas del mismo tamaño que el entorno actual más un elemento adicional para el puntero nulo.
+				- Utilizar una función como 'malloc' en C para asignar la memoria necesaria.
 
-					2.1.2. Determinar el tamaño del entorno
-						- Iterar sobre el arreglo de cadenas 'environ' y contar el número de elementos (variables de entorno) hasta encontrar un puntero nulo, que indica el final del arreglo.
+			2.1.4. Copiar las variables de entorno al nuevo arreglo
+				- Iterar sobre el arreglo de cadenas 'environ' y, para cada elemento, reservar memoria para una nueva cadena del mismo tamaño que la cadena original (usando 'malloc' o similar).
+				- Utilizar una función como 'strcpy' en C para copiar el contenido de cada cadena del entorno original al nuevo arreglo.
+				- Establecer el último elemento del nuevo arreglo como un puntero nulo.
 
-					2.1.3. Crear una copia del entorno
-						- Reservar memoria para un nuevo arreglo de cadenas del mismo tamaño que el entorno actual más un elemento adicional para el puntero nulo.
-						- Utilizar una función como 'malloc' en C para asignar la memoria necesaria.
+			2.1.5. Almacenar la copia del entorno en una variable adecuada
+				- Crear una variable adecuada (por ejemplo, un puntero a un arreglo de cadenas) para almacenar el puntero al nuevo arreglo de cadenas que representa la copia del entorno.
+				- Asignar el puntero al nuevo arreglo a esta variable.
+			2.1.6. Proporcionar funciones o métodos para acceder y modificar las variables de entorno
+				- Implementar funciones o métodos para realizar operaciones comunes en las variables de entorno, como obtener el valor de una variable, establecer el valor de una variable o eliminar una variable (Builtin)
 
-					2.1.4. Copiar las variables de entorno al nuevo arreglo
-						- Iterar sobre el arreglo de cadenas 'environ' y, para cada elemento, reservar memoria para una nueva cadena del mismo tamaño que la cadena original (usando 'malloc' o similar).
-						- Utilizar una función como 'strcpy' en C para copiar el contenido de cada cadena del entorno original al nuevo arreglo.
-						- Establecer el último elemento del nuevo arreglo como un puntero nulo.
+			--Este detalle del paso 2.1 describe cómo obtener el entorno actual del programa, determinar su tamaño, crear una copia del entorno y sus variables, y almacenar la copia del entorno en una variable adecuada.
 
-					2.1.5. Almacenar la copia del entorno en una variable adecuada
-						- Crear una variable adecuada (por ejemplo, un puntero a un arreglo de cadenas) para almacenar el puntero al nuevo arreglo de cadenas que representa la copia del entorno.
-						- Asignar el puntero al nuevo arreglo a esta variable.
+		2.2. Obtener y crear variables para almacenar el PATH
 
-					2.1.6. Ir al siguiente subpaso (2.2. Crear variables para almacenar el PATH)
+			2.2.1. Buscar la variable PATH en el arreglo de variables de entorno copiadas
+				- Iterar sobre el arreglo de cadenas creado en el paso 2.1.5 hasta encontrar una cadena que comience con "PATH=".
+				- Si no se encuentra la cadena "PATH=", manejar el error correspondiente, mostrando un mensaje de error y estableciendo un valor predeterminado para PATH.
 
-					--Este detalle del paso 2.1 describe cómo obtener el entorno actual del programa, determinar su tamaño, crear una copia del entorno y sus variables, y almacenar la copia del entorno en una variable adecuada.
+			2.2.2. Obtener el valor de la variable PATH
+				- Una vez encontrada la cadena "PATH=", obtener el valor de la variable al extraer la subcadena que sigue al signo igual (=).
+				- Crear una nueva cadena de caracteres para almacenar el valor de la variable PATH y reservar memoria suficiente para ella usando una función como 'malloc' en C.
+				- Copiar el valor de la variable PATH a la nueva cadena utilizando una función como 'strcpy' o 'strncpy' en C.
 
-		2.2. Crear variables para almacenar el PATH
-			- Obtener la variable de entorno PATH del entorno copiado en el paso 2.1 utilizando una función como 'getenv' en C.
-			- Almacenar el PATH en una variable adecuada (por ejemplo, una cadena).
-			--Aquí tienes un detalle adicional del paso 2.2:
+			2.2.3. Crear una estructura de datos para almacenar las rutas del PATH
+				- Crear una estructura de datos adecuada, como una lista enlazada o un arreglo dinámico, para almacenar las rutas individuales del PATH.
+				- Reservar memoria para la estructura de datos utilizando una función como 'malloc' en C.
 
-					2.2.1. Obtener la variable de entorno PATH del entorno copiado
-						- Utilizar la función 'getenv' en C, proporcionando el nombre de la variable de entorno "PATH" y el entorno copiado en el paso 2.1.
-						- 'getenv' buscará la variable de entorno "PATH" en el entorno copiado y devolverá un puntero a la cadena que contiene su valor (si la variable de entorno existe) o un puntero nulo (si no existe).
+			2.2.4. Separar las rutas individuales del valor de PATH
+				- Iterar sobre el valor de la variable PATH y dividir las rutas individuales utilizando el delimitador ':' de linux.
+				- Para cada ruta, crear una nueva cadena de caracteres, reservar memoria para ella y copiar el contenido de la ruta en la nueva cadena.
 
-					2.2.2. Verificar si se obtuvo el valor de la variable de entorno PATH
-						- Comprobar si el puntero devuelto por 'getenv' es nulo.
-						- Si es nulo, manejar el error de manera adecuada (por ejemplo, estableciendo un valor predeterminado para el PATH o mostrando un mensaje de error y terminando el programa).
+			2.2.5. Almacenar las rutas individuales en la estructura de datos
+				- A medida que se extraen las rutas individuales, insertar cada ruta en la estructura de datos creada en el paso 2.2.3 (por ejemplo, añadiendo cada ruta al final de la lista enlazada o al arreglo dinámico).
+				- Asegurarse de mantener actualizado el tamaño de la estructura de datos para que refleje el número de rutas almacenadas.
 
-					2.2.3. Copiar el valor de la variable de entorno PATH
-						- Reservar memoria para una nueva cadena del mismo tamaño que la cadena que contiene el valor de la variable de entorno PATH (usando 'malloc' o similar).
-						- Utilizar una función como 'strcpy' en C para copiar el contenido de la cadena con el valor de la variable de entorno PATH al nuevo espacio de memoria reservado.
+			2.2.6. Crear una variable adecuada para almacenar la estructura de datos
+				- Crear una variable adecuada (por ejemplo, un puntero a la estructura de datos) para almacenar la estructura de datos que contiene las rutas individuales del PATH.
+				- Asignar el puntero a la estructura de datos a esta variable.
 
-					2.2.4. Almacenar el PATH en una variable adecuada
-						- Crear una variable adecuada (por ejemplo, una cadena o un puntero a un arreglo de caracteres) para almacenar el puntero a la nueva cadena que contiene el valor de la variable de entorno PATH.
-						- Asignar el puntero a la nueva cadena a esta variable.
-
-					2.2.5. Ir al siguiente subpaso (2.3. Crear variables para almacenar el búfer)
-					--Este detalle del paso 2.2 describe cómo obtener la variable de entorno PATH del entorno copiado en el paso 2.1 utilizando la función 'getenv' en C, verificar si se obtuvo el valor de la variable de entorno PATH, copiar el valor de la variable de entorno PATH y almacenar el PATH en una variable adecuada.
+			--Este detalle del paso 2.2 describe cómo obtener la variable de entorno PATH del entorno copiado en el paso 2.1 utilizando la función 'getenv' en C, verificar si se obtuvo el valor de la variable de entorno PATH, copiar el valor de la variable de entorno PATH y almacenar el PATH en una variable adecuada.
 
 		2.3. Crear variables para almacenar el búfer
-			- Utilizar el búfer dinámico inicializado en el paso 1.3 para leer la entrada del usuario.
-			- Almacenar el puntero al búfer en una variable adecuada (por ejemplo, un puntero a un arreglo de caracteres).
-			--Aquí tienes un detalle adicional del paso 2.3:
 
-					2.3.1. Reservar memoria para el búfer dinámico
-						- Utilizar una función como 'malloc' en C para asignar la memoria necesaria para el búfer dinámico.
-						- Especificar el tamaño inicial del búfer, que puede ser un valor fijo (por ejemplo, 1024 bytes) o basado en algún criterio, como el tamaño de la entrada esperada.
+			2.3.1. Definir el tamaño inicial del búfer
+				- Establecer un tamaño inicial en 1024 bytes para el búfer, para Almacenar los caracteres de entrada del usuario.
 
-					2.3.2. Verificar si se asignó correctamente la memoria para el búfer
-						- Comprobar si el puntero devuelto por 'malloc' es nulo.
-						- Si es nulo, manejar el error de manera adecuada (por ejemplo, mostrando un mensaje de error y terminando el programa).
+			2.3.2. Reservar memoria dinamica para el búfer
+				- Utilizar 'malloc' para asignar la memoria necesaria para el búfer dinámico, utilizando el tamaño inicial definido en el paso 2.3.1.
+				- Crear un puntero que apunte a la memoria reservada para el búfer.
 
-					2.3.3. Inicializar el contenido del búfer
-						- Establecer todos los elementos del búfer en un valor predeterminado, como 0 o '\0', utilizando una función como 'memset' en C.
+			2.3.3. Inicializar el búfer
+				- Establecer todos los elementos del búfer en un valor inicial, como '\0' (carácter nulo) para que el búfer esté correctamente inicializado antes de recibir la entrada del usuario.
 
-					2.3.4. Almacenar el puntero al búfer en una variable adecuada
-						- Crear una variable adecuada (por ejemplo, un puntero a un arreglo de caracteres) para almacenar el puntero al búfer dinámico.
-						- Asignar el puntero al búfer dinámico a esta variable.
+			2.3.4. Leer la entrada del usuario
+				- Utilizar 'getline' en C para leer la entrada del usuario y almacenarla en el búfer dinámico.
+				- Asegurarse de que la función de lectura de entrada utilice el tamaño actual del búfer para evitar desbordamientos.
 
-					2.3.5. Ir al siguiente subpaso (2.4. Crear variables para almacenar el historial)
+			2.3.5. Verificar si es necesario redimensionar el búfer
+				- Comprobar si la entrada del usuario excede el tamaño actual del búfer.
+				- Si es necesario, redimensionar el búfer para acomodar la entrada adicional del usuario.
 
-					--Este detalle del paso 2.3 describe cómo reservar memoria para el búfer dinámico, verificar si se asignó correctamente la memoria para el búfer, inicializar el contenido del búfer, y almacenar el puntero al búfer en una variable adecuada.
+			2.3.6. Redimensionar el búfer si es necesario
+				- Si se necesita redimensionar el búfer, utilizar 'realloc' en C para cambiar el tamaño de la memoria reservada para el búfer.
+				- Asegurarse de que el puntero al búfer apunte a la nueva ubicación de memoria si 'realloc' cambia la dirección de memoria del búfer.
+				- Actualizar el tamaño del búfer para reflejar el nuevo tamaño.
 
-		2.4. Crear variables para almacenar el historial
-			- Utilizar la estructura de datos creada e inicializada en el paso 1.4 para almacenar el historial de comandos.
-			- Almacenar un puntero a la estructura de datos del historial en una variable adecuada (por ejemplo, un puntero a una lista enlazada, un vector o un arreglo dinámico de cadenas).
-			--Aquí tienes un detalle adicional del paso 2.4:
+			2.3.7. Procesar la entrada del usuario
+				- Una vez que la entrada del usuario se haya almacenado en el búfer, procesarla según las necesidades específicas del programa (por ejemplo, ejecutando comandos, realizando operaciones, etc.).
 
-					2.4.1. Crear la estructura de datos para el historial
-						- Utilizar la estructura de datos creada e inicializada en el paso 1.4, que puede ser una lista enlazada, un vector o un arreglo dinámico de cadenas.
+			2.3.8. Liberar la memoria del búfer
+				- Cuando ya no se necesite el búfer, liberar la memoria reservada para él utilizando una función como 'free' en C.
 
-					2.4.2. Cargar el historial desde el archivo .simple_shell_history si existe
-						- Leer el archivo .simple_shell_history en el directorio $HOME.
-						- Por cada línea del archivo, agregar la línea como un elemento en la estructura de datos del historial.
+		2.4. Inicializar el historial de comandos y crear variables para almacenar el historial
 
-					2.4.3. Verificar si se creó e inicializó correctamente la estructura de datos del historial
-						- Comprobar si la estructura de datos del historial está vacía o contiene elementos leídos desde el archivo .simple_shell_history (si existía).
-						- Si la estructura de datos del historial no está vacía, agregar el elemento actual al final del historial.
+			2.4.1. Crear la estructura de datos para almacenar el historial de comandos
+				- Crear una estructura de datos adecuada, como una lista enlazada o un arreglo dinámico, para almacenar los comandos ingresados previamente por el usuario.
+				- Reservar memoria para la estructura de datos utilizando una función como 'malloc' en C.
 
-					2.4.4. Almacenar el puntero a la estructura de datos del historial en una variable adecuada
-						- Crear una variable adecuada (por ejemplo, un puntero a una lista enlazada, un vector o un arreglo dinámico de cadenas) para almacenar el puntero a la estructura de datos del historial.
-						- Asignar el puntero a la estructura de datos del historial a esta variable.
+			2.4.2. Crear una variable adecuada para almacenar la estructura de datos
+				- Crear una variable adecuada (por ejemplo, un puntero a la estructura de datos) para almacenar la estructura de datos que contiene el historial de comandos.
+				- Asignar el puntero a la estructura de datos a esta variable.
 
-					2.4.5. Ir al siguiente subpaso (2.5. Crear variables para almacenar el control de señales)
+			2.4.3. Obtener la ruta al archivo .simple_shell_history
+				- Obtener la ruta al directorio $HOME a través de la variable de entorno almacenada en el paso 2.1.5 o mediante la función 'getenv'.
+				- Crear una cadena de caracteres para almacenar la ruta completa al archivo .simple_shell_history, concatenando la ruta al directorio $HOME con el nombre del archivo (por ejemplo, "/.simple_shell_history").
+				- Reservar memoria suficiente para la cadena utilizando una función como 'malloc' en C y copiar la ruta completa en la cadena.
+
+			2.4.4. Leer el archivo .simple_shell_history si existe
+				- Utilizar la llamada al sistema 'open' en C para abrir el archivo .simple_shell_history en modo de lectura (por ejemplo, O_RDONLY).
+				- Si el archivo no existe, crearlo utilizando la llamada al sistema 'open' en modo de escritura y actualización (por ejemplo, O_WRONLY | O_CREAT | O_TRUNC) y luego cerrar el archivo usando la llamada al sistema 'close'.
+				- Si el archivo existe, leer su contenido línea por línea utilizando la llamada al sistema 'getline' en C en lugar de 'fgets'.
+
+			2.4.5. Cargar el contenido del archivo en la estructura de datos del historial
+				- A medida que se leen las líneas del archivo .simple_shell_history, almacenar cada comando en la estructura de datos creada en el paso 2.4.1 (por ejemplo, añadiendo cada comando al final de la lista enlazada o al arreglo dinámico).
+				- Para utilizar 'getline', declarar un puntero a 'char' (que representará la línea leída) y una variable 'size_t' para almacenar el tamaño del búfer. Inicializar el puntero a 'char' como NULL y el tamaño del búfer como 0.
+				- Leer las líneas utilizando 'getline' con un bucle 'while' que continúe hasta que 'getline' devuelva -1, lo que indica el final del archivo.
+				- Asegurarse de mantener actualizado el tamaño de la estructura de datos para que refleje el número de comandos almacenados.
+
+			2.4.6. Cerrar el archivo .simple_shell_history
+				- Una vez que se haya leído todo el contenido del archivo y se haya cargado en la estructura de datos del historial, cerrar el archivo utilizando la llamada al sistema 'close' en C.
+
+			((2.4.7. Proporcionar funciones o métodos para interactuar con el historial de comandos (paso más adelante)
+					- Implementar una funcion para agregar un nuevo comando.
+					- Para agregar un nuevo comando al historial, utilice la llamada al sistema 'write' para escribir el comando en el archivo .simple_shell_history y actualizar la estructura de datos en memoria.
 
 					--Este detalle del paso 2.4 describe cómo crear la estructura de datos para el historial, cargar el historial desde el archivo .simple_shell_history si existe, verificar si se creó e inicializó correctamente la estructura de datos del historial, y almacenar el puntero a la estructura de datos del historial en una variable adecuada.
 
@@ -250,11 +154,7 @@ Aquí tienes un flujograma detallado de cómo serían las instrucciones y tareas
 						- Dependiendo de las características y funcionalidades adicionales que se deseen implementar, puede ser necesario crear variables adicionales para almacenar información relacionada.
 						- Estas variables pueden ser útiles para optimizar el rendimiento, mejorar la experiencia del usuario o implementar funcionalidades avanzadas.
 
-					2.5.5. Ir al siguiente paso (3. Determinar si el modo es interactivo o no interactivo)
-
 					--Este detalle del paso 2.5 describe cómo crear variables para almacenar información adicional relacionada con el proceso, la ejecución de comandos, el manejo de errores y otras necesidades específicas del programa. Estas variables pueden ser útiles para optimizar el rendimiento, mejorar la experiencia del usuario o implementar funcionalidades avanzadas.
-
-		2.6. Ir al siguiente paso (3. Determinar si el modo es interactivo o no interactivo)
 
 		--Este detalle del paso 2 describe cómo crear e inicializar las variables necesarias para almacenar el entorno, el PATH, el búfer y el historial de comandos, así como cualquier otra variable adicional que pueda ser necesaria en función de las necesidades específicas del programa.
 
