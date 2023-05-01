@@ -31,9 +31,6 @@ Aquí tienes un flujograma detallado de cómo serían las instrucciones y tareas
 				- Utilizar una función como 'strcpy' en C para copiar el contenido de cada cadena del entorno original al nuevo arreglo.
 				- Establecer el último elemento del nuevo arreglo como un puntero nulo.
 
-			2.1.5. Almacenar la copia del entorno en una variable adecuada
-				- Crear una variable adecuada (por ejemplo, un puntero a un arreglo de cadenas) para almacenar el puntero al nuevo arreglo de cadenas que representa la copia del entorno.
-				- Asignar el puntero al nuevo arreglo a esta variable.
 			2.1.6. Proporcionar funciones o métodos para acceder y modificar las variables de entorno
 				- Implementar funciones o métodos para realizar operaciones comunes en las variables de entorno, como obtener el valor de una variable, establecer el valor de una variable o eliminar una variable (Builtin)
 
@@ -41,8 +38,8 @@ Aquí tienes un flujograma detallado de cómo serían las instrucciones y tareas
 
 		2.2. Obtener y crear variables para almacenar el PATH
 
-			2.2.1. Buscar la variable PATH en el arreglo de variables de entorno copiadas
-				- Iterar sobre el arreglo de cadenas creado en el paso 2.1.5 hasta encontrar una cadena que comience con "PATH=".
+			2.2.1. Buscar la variable PATH en el arreglo de variables de entorno creado en el paso 2.1
+				- Iterar sobre el arreglo de cadenas creado en el paso 2.1 hasta encontrar una cadena que comience con "PATH=".
 				- Si no se encuentra la cadena "PATH=", manejar el error correspondiente, mostrando un mensaje de error y estableciendo un valor predeterminado para PATH.
 
 			2.2.2. Obtener el valor de la variable PATH
@@ -54,7 +51,7 @@ Aquí tienes un flujograma detallado de cómo serían las instrucciones y tareas
 				- Crear una estructura de datos adecuada, como una lista enlazada o un arreglo dinámico, para almacenar las rutas individuales del PATH.
 				- Reservar memoria para la estructura de datos utilizando una función como 'malloc' en C.
 
-			2.2.4. Separar las rutas individuales del valor de PATH
+			2.2.4. Tokenizar, separar las rutas individuales del valor de PATH
 				- Iterar sobre el valor de la variable PATH y dividir las rutas individuales utilizando el delimitador ':' de linux.
 				- Para cada ruta, crear una nueva cadena de caracteres, reservar memoria para ella y copiar el contenido de la ruta en la nueva cadena.
 

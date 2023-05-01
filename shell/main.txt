@@ -1,0 +1,168 @@
+para abs
+char **tokenize_input(char *input)
+{
+	int buffer_size = BUFFER_SIZE;
+	char **tokens = (char **)malloc(buffer_size * sizeof(char *));
+	const char *delimiters = " \t\r\n\a";
+	char *token;
+	int index = 0;
+
+	if (!tokens)
+	{
+		perror("malloc");
+		exit(EXIT_FAILURE);
+	}
+
+	token = strtok(input, delimiters);
+	while (token != NULL)
+	{
+		tokens[index++] = token;
+
+		if (index >= buffer_size)
+		{
+			buffer_size += BUFFER_SIZE;
+			tokens = realloc(tokens, buffer_size * sizeof(char *));
+			if (!tokens)
+			{
+				perror("realloc");
+				exit(EXIT_FAILURE);
+			}
+		}
+
+		token = strtok(NULL, delimiters);
+	}
+
+	tokens[index] = NULL;
+	return (tokens);
+}
+
+void print_double_pointer(char **double_pointer) {
+	int i = 0;
+	while (double_pointer[i] != NULL) {
+		printf("%s\n", double_pointer[i]);
+		i++;
+	}
+}
+int main() {
+	char *input;
+	char **tokens = NULL;
+	setup_signal_handlers();
+
+	while (1) {
+		print_prompt();
+		input = read_input();
+
+		if (!input) {
+			printf("saliendo\n");
+			exit(EXIT_SUCCESS);
+		}
+		remove_comments(input);
+		tokens = tokenize_input(input);
+		print_double_pointer(tokens);
+	}
+
+	return 0;
+}
+
+
+------------------
+isnointeractive interactivo
+int main(int argc, char **argv)
+{
+    int c;
+    int result;
+	printf("Los argumentos son:\n");
+	for (c = 0; c < argc; c++)
+	{
+		printf("%s\n", argv[c]);
+	}
+	result = check_arguments_and_terminal(argc, argv);
+	if (result == 1)
+	{
+		printf("\nmodo interactivo\n");
+	} else if (result == 0)
+	{
+		printf("\nmodo no interactivo\n");
+	} else
+	{
+		printf("\nsaliendo error\n");
+	}
+
+	return 0;
+}
+
+-----------------------------------
+path env
+
+int shell_start() {
+	char **env_copy = get_environment_copy();
+	char *path_value;
+	char **paths;
+	size_t i;
+	char *env_value;
+
+	/*El resto de tu código shell aquí*/
+	print_environment(env_copy); /*Ejemplo de uso de print_environment*/
+printf("------------------------\n\n\n\n");
+	my_setenv(&env_copy, "MY_VARIABLE", "my_value"); /*Ejemplo de uso de my_setenv*/
+	print_environment(env_copy); /*Ejemplo de uso de print_environment*/
+printf("------------------------\n\n\n\n");
+	my_unsetenv(&env_copy, "MY_VARIABLE"); /*Ejemplo de uso de my_unsetenv*/
+	print_environment(env_copy); /*Ejemplo de uso de print_environment*/
+printf("------------------------\n\n\n\n");
+
+	path_value = get_path_variable(env_copy);
+	paths = tokenize_path(path_value);
+
+	for (i = 0; paths[i] != NULL; i++) {
+		printf("%s\n", paths[i]);
+	}
+printf("************************\n\n\n");
+	env_value = get_environment_variable(env_copy, "USER");
+	printf("%s\n",env_value);
+
+
+	/*recuerda liberar la memoria*/
+	for (i = 0; env_copy[i] != NULL; i++) {
+		free(env_copy[i]);
+	}
+	free(env_copy);
+
+	for (i = 0; paths[i] != NULL; i++) {
+		free(paths[i]);
+	}
+	free(paths);
+
+	return 0;
+}
+
+int main() {
+	return shell_start();
+}
+
+--------------------------------------------------------
+PIPI
+
+#include "main.h"
+int main() {
+	char input[] = "  ls -la && pwd   ;   ls -r  ";
+	TokenizedInputPIPE tokenized = tokenize_inputpipe(input);
+	int i;
+
+	printf("Commands:\n");
+	for (i = 0; i < tokenized.num_commands; ++i) {
+		printf("Command %d:..%s..\n", i, tokenized.commands[i]);
+		free(tokenized.commands[i]);
+	}
+
+	printf("\nDelimiters:\n");
+	for (i = 0; i < tokenized.num_delimiters; ++i) {
+		printf("Delimiter %d:..%s..\n", i, tokenized.delimiters[i]);
+		free(tokenized.delimiters[i]);
+	}
+
+	free(tokenized.commands);
+	free(tokenized.delimiters);
+
+	return 0;
+}
