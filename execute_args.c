@@ -1,16 +1,4 @@
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
+#include "main.h"
 
 int execute_command_args(const char *command_line) {
     char *command, *save_ptr, *token;
@@ -59,11 +47,4 @@ int execute_command_args(const char *command_line) {
     free(command);
     free(argv);
     return 0;
-}
-
-int main()
-{
-    int i = execute_command_args("pwd -l -a -r");
-    printf("%d\n", i);
-    return i;
 }

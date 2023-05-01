@@ -8,6 +8,9 @@
 #include <sys/stat.h>
 #include <ctype.h>
 #include <limits.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+
 
 #define BUFFER_SIZE 1024
 extern char **environ;
@@ -20,6 +23,9 @@ typedef struct {
     int num_commands;
     int num_delimiters;
 } TokenizedInputPIPE;
+
+int main_interactive(void);
+int main_non_interactive(int argc, char **argv);
 
 void print_prompt(void);
 char *read_input();
@@ -38,9 +44,14 @@ int my_setenv(char ***env, const char *var, const char *value);
 int my_unsetenv(char ***env, const char *var);
 void print_environment(char **env);
 
+char **tokenizemin(char *str);
 
 char *get_path_variable(char **env_copy);
+
 char **tokenize_path(const char *path_value);
+size_t count_paths(const char *path_value);
+void copy_paths(char **paths, const char *path_value);
+
 char *get_environment_variable(char **env_copy, const char *var);
 char *trim(char *str);
 
@@ -49,5 +60,9 @@ int find_delimiter(const char *comst, const char **delm, int numdelm);
 void add_command(TokenizedInputPIPE *rs, const char *comst, const char *dlpst);
 void add_delimiter(TokenizedInputPIPE *result, const char *delimiter);
 
+int find_executable(const char *cmd, char **path_dirs);
+
+int execute_command_args(const char *command_line);
+int execute_program(char *program);
 int find_executable(const char *cmd, char **path_dirs);
 #endif

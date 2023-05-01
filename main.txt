@@ -117,6 +117,7 @@ printf("------------------------\n\n\n\n");
 	for (i = 0; paths[i] != NULL; i++) {
 		printf("%s\n", paths[i]);
 	}
+
 printf("************************\n\n\n");
 	env_value = get_environment_variable(env_copy, "USER");
 	printf("%s\n",env_value);
@@ -151,7 +152,7 @@ int main() {
 
 	printf("Commands:\n");
 	for (i = 0; i < tokenized.num_commands; ++i) {
-		printf("Command %d:..%s..\n", i, tokenized.commands[i]);
+		printf("Command %d:%s\n", i, tokenized.commands[i]);
 		free(tokenized.commands[i]);
 	}
 

@@ -17,19 +17,19 @@
  *
  * Return: 1 si no hay argumentos y la entrada estándar está conectada a un
  * terminal, 0 si se proporciona un argumento válido o -1 si el argumento
- * proporcionado es inválido.
+ * proporcionado es inválido y 2 si se usa tuberia.
  */
 int check_arguments_and_terminal(int argc, char **argv)
 {
 	struct stat buffer;
 
-	if (argc <= 1)
+	if (argc == 1)
 	{
 		if (isatty(STDIN_FILENO))
 		{
 			return (1);
 		}
-		return (0);
+		return (2);
 	}
 
 	if (stat(argv[1], &buffer) == 0)
