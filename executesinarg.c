@@ -1,31 +1,58 @@
 #include "main.h"
 
-int execute_program(char *program) {
+int execute_command_args(const char *command_line)
+{
+	char *command, *save_ptr, *token;
+	char **argv = NULL;
+	int argc = 0, status;
 	pid_t pid;
-	int status;
+
+	command = strdup(command_line);
+	if (!command)
+	{
+		perror("strdup");
+		return (-1);
+	}
+
+	token = strtok_r(command, " ", &save_ptr);
+	while (token)
+	{
+		argv = realloc(argv, (argc + 1) * sizeof(char *));
+		argv[argc++] = token;
+		token = strtok_r(NULL, " ", &save_ptr);
+	}
+	argv = realloc(argv, (argc + 1) * sizeof(char *));
+	argv[argc] = NULL;
 
 	pid = fork();
-	if (pid < 0) {
+	if (pid < 0)
+	{
 		perror("fork");
-		return -1;
-	} else if (pid == 0) {
-		char *argv[2];
-		argv[0] = program;
-		argv[1] = NULL;
-		if (execvp(argv[0], argv) < 0) {
-			perror(program);
-			exit(EXIT_FAILURE);
-		}
-	} else {
-		if (waitpid(pid, &status, 0) < 0) {
+		free(command);
+		free(argv);
+		return (-1);
+	} else if (pid == 0)
+	{
+		execvp(argv[0], argv);
+		perror("execvp");
+		exit(EXIT_FAILURE);
+	} else
+	{
+		if (waitpid(pid, &status, 0) < 0)
+		{
 			perror("waitpid");
-			return -1;
-		}
-		if (WIFEXITED(status) && WEXITSTATUS(status) == 0) {
-			return 0;
-		} else {
-			return 127;
+			free(command);
+			free(argv);
+			return (-1);
 		}
 	}
-	return 0;
+
+	if (WIFEXITED(status) == 1)
+	{
+		return (WEXITSTATUS(status));
+	}
+
+	free(command);
+	free(argv);
+	return (0);
 }
