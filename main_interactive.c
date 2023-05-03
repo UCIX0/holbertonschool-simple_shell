@@ -11,19 +11,17 @@ int main_interactive(void)
 		if (!input) {
 			exit(EXIT_SUCCESS);
 		}
-
+		remove_comments(input);
 		if (input[0] != '\0') {
-			remove_comments(input);
 			TokenizedInputPIPE commandunit;
 			char **env_copy = get_environment_copy();
 			char *path_value;
 			char **paths;
 			int status;
+			int i = 0;
 			path_value = get_path_variable(env_copy);
 			paths = tokenize_path(path_value);
 			commandunit = tokenize_inputpipe(input);
-
-			int i = 0;
 
 			do
 			{
