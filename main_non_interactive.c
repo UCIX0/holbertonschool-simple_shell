@@ -18,6 +18,11 @@ int main_non_interactive(char *arg0)
 		{
 			int i = 0;
 			remove_comments(input);
+			if (input[0] == '\0')
+			{
+				free(input);
+				exit(EXIT_SUCCESS);
+			}
 			commandunit = tokenize_inputpipe(input);
 
 			do
