@@ -21,6 +21,7 @@ char *find_executable(const char *cmd, char **path_dirs, int mode, char *arg0)
 {
 	struct stat buffer;
 	char *full_path = (char *)malloc(PATH_MAX);
+
 	int i;
 
 	if (full_path == NULL)
