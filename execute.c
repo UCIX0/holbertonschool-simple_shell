@@ -7,6 +7,11 @@ int execute (char *commandu, char **paths, int mode, char *arg0)
 	char *command_path;
 	int countelements;
 	cmmdunittokens = tokenize_string(commandu);
+	if (cmmdunittokens[0] == NULL)
+	{
+		free_double_pointer(cmmdunittokens, count_elements(cmmdunittokens));
+		return -1;
+	}
 	command_path = find_executable(cmmdunittokens[0], paths, mode, arg0);
 	countelements = count_elements(cmmdunittokens);
 	if (command_path != NULL)
