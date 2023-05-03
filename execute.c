@@ -21,6 +21,7 @@ int execute (char *commandu, char **paths, int mode, char *arg0)
 		}
 	}
 	free_double_pointer(cmmdunittokens, count_elements(cmmdunittokens));
+	free(command_path);
 	return status;
 }
 
