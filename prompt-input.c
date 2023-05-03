@@ -65,7 +65,6 @@ void remove_comments(char *input)
 	/* Buscar el inicio del comentario */
 	comment_start = strchr(input, '#');
 
-	/* Si se encuentra un comentario, verificar si es el primer caracter o si hay un espacio antes */
 	while (comment_start != NULL)
 	{
 		if (comment_start == input || *(comment_start - 1) == ' ')

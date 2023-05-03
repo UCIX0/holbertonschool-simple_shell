@@ -15,13 +15,13 @@
 #define BUFFER_SIZE 1024
 extern char **environ;
 
-/*Estrucutra de datos de toke.c donde se va alacenar los comandos y los delimitadores
-*/
-typedef struct {
-    char **commands;
-    char **delimiters;
-    int num_commands;
-    int num_delimiters;
+
+typedef struct
+{
+	char **commands;
+	char **delimiters;
+	int num_commands;
+	int num_delimiters;
 } TokenizedInputPIPE;
 
 int main_interactive(void);
@@ -38,8 +38,8 @@ int check_arguments_and_terminal(void);
 
 int count_elements(char **ptr);
 
-char **get_environment_copy();
-size_t get_environment_size();
+char **get_environment_copy(void);
+size_t get_environment_size(void);
 char **copy_environment(char **env, size_t env_size);
 
 int my_setenv(char ***env, const char *var, const char *value);
@@ -64,7 +64,7 @@ void add_delimiter(TokenizedInputPIPE *result, const char *delimiter);
 
 char *find_executable(const char *cmd, char **path_dirs, int mode, char *arg0);
 
-int execute (char *commandu, char **paths, int mode, char *arg0);
+int execute(char *commandu, char **paths, int mode, char *arg0);
 int execve_without_arg(const char *program);
 int execute_with_args(const char *path, char **args, int count);
 

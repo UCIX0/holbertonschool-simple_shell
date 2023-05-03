@@ -17,6 +17,7 @@ int main_non_interactive(char *arg0)
 		if (input[0] != '\0')
 		{
 			int i = 0;
+
 			remove_comments(input);
 			if (input[0] == '\0')
 			{
@@ -27,8 +28,7 @@ int main_non_interactive(char *arg0)
 			}
 			commandunit = tokenize_inputpipe(input);
 
-			do
-			{
+			do {
 				if (i == 0 || commandunit.delimiters[i - 1][0] == ';')
 				{
 					status = execute(commandunit.commands[i], paths, 1, arg0);
@@ -53,6 +53,6 @@ int main_non_interactive(char *arg0)
 	free_double_pointer(env_copy, count_elements(env_copy));
 	free_double_pointer(paths, count_elements(paths));
 
-	return 0;
+	return (0);
 }
 

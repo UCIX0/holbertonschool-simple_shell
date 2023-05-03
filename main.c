@@ -13,7 +13,8 @@ int check_arguments_and_terminal(void)
 int main(int argc, char **arg)
 {
 	int interactiveornon;
-	argc ++;
+
+	argc++;
 	interactiveornon = check_arguments_and_terminal();
 	if (interactiveornon == 0)
 	{
@@ -26,5 +27,5 @@ int main(int argc, char **arg)
 	{
 		printf("Error\n");
 	}
-	return 0;
+	return (0);
 }
