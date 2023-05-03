@@ -10,7 +10,7 @@
 #include <limits.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-
+#include <errno.h>
 
 #define BUFFER_SIZE 1024
 extern char **environ;
@@ -25,7 +25,7 @@ typedef struct {
 } TokenizedInputPIPE;
 
 int main_interactive(void);
-int main_non_interactive(int argc, char **argv);
+int main_non_interactive(char *arg0);
 
 void print_prompt(void);
 char *read_input();
@@ -34,7 +34,9 @@ void handle_sigterm(int sig);
 void setup_signal_handlers(void);
 void remove_comments(char *input);
 
-int check_arguments_and_terminal(int argc, char **argv);
+int check_arguments_and_terminal(void);
+
+int count_elements(char **ptr);
 
 char **get_environment_copy();
 size_t get_environment_size();
@@ -44,7 +46,6 @@ int my_setenv(char ***env, const char *var, const char *value);
 int my_unsetenv(char ***env, const char *var);
 void print_environment(char **env);
 
-char **tokenizemin(char *str);
 
 char *get_path_variable(char **env_copy);
 
@@ -53,16 +54,20 @@ size_t count_paths(const char *path_value);
 void copy_paths(char **paths, const char *path_value);
 
 char *get_environment_variable(char **env_copy, const char *var);
-char *trim(char *str);
+
+char **tokenize_string(const char *input);
 
 TokenizedInputPIPE tokenize_inputpipe(char *input);
 int find_delimiter(const char *comst, const char **delm, int numdelm);
 void add_command(TokenizedInputPIPE *rs, const char *comst, const char *dlpst);
 void add_delimiter(TokenizedInputPIPE *result, const char *delimiter);
 
-int find_executable(const char *cmd, char **path_dirs);
+char *find_executable(const char *cmd, char **path_dirs, int mode, char *arg0);
 
-int execute_command_args(const char *command_line);
-int execute_program(char *program);
-int find_executable(const char *cmd, char **path_dirs);
+int execute (char *commandu, char **paths, int mode, char *arg0);
+int execve_without_arg(const char *program);
+int execute_with_args(const char *path, char **args, int count);
+
+void free_tokenized_input_pipe(TokenizedInputPIPE *input);
+void free_double_pointer(char **ptr, int count);
 #endif

@@ -41,14 +41,12 @@ void add_command(TokenizedInputPIPE *rs, const char *comst, const char *dlpst)
 	TokenizedInputPIPE *result = rs;
 	const char *delimiter_pos = dlpst;
 	size_t command_len = delimiter_pos - comst;
-	char *trimmed_command;
 	char *command = (char *)malloc((command_len + 1) * sizeof(char));
 	size_t new_size;
 
 	strncpy(command, comst, command_len);
 	command[command_len] = '\0';
-	trimmed_command = trim(command);
-	result->commands[result->num_commands] = strdup(trimmed_command);
+	result->commands[result->num_commands] = strdup(command);
 	free(command);
 	++result->num_commands;
 	new_size = (result->num_commands + 1) * sizeof(char *);
@@ -111,13 +109,10 @@ TokenizedInputPIPE tokenize_inputpipe(char *input)
 		}
 		else
 		{
-			char *trimmed_command = trim(comst);
-
-			result.commands[result.num_commands] = strdup(trimmed_command);
+			result.commands[result.num_commands] = strdup(comst);
 			++result.num_commands;
 			break;
 		}
 	}
-
 	return (result);
 }
