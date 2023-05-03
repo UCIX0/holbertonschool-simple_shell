@@ -21,6 +21,8 @@ int main_non_interactive(char *arg0)
 			if (input[0] == '\0')
 			{
 				free(input);
+				free_double_pointer(env_copy, count_elements(env_copy));
+				free_double_pointer(paths, count_elements(paths));
 				exit(EXIT_SUCCESS);
 			}
 			commandunit = tokenize_inputpipe(input);
