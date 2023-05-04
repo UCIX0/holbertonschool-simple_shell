@@ -1,5 +1,9 @@
 #include "main.h"
-
+/**
+ * count_elements - cuenta el número de elementos en un array de punteros
+ * @ptr: array de punteros
+ * Return: número de elementos en el array
+ */
 int count_elements(char **ptr)
 {
 	int count = 0;
@@ -12,6 +16,26 @@ int count_elements(char **ptr)
 	return (count);
 }
 
+/**
+ * resize_tokens_array - redimensiona un array de tokens
+ * @tokens: doble puntero al array de tokens
+ * @tokens_size: puntero al tamaño actual del array
+ */
+void resize_tokens_array(char ***tokens, size_t *tokens_size)
+{
+	*tokens_size *= 2;
+	*tokens = (char **)realloc(*tokens, *tokens_size * sizeof(char *));
+	if (!*tokens)
+	{
+		perror("realloc");
+		exit(EXIT_FAILURE);
+	}
+}
+/**
+ * tokenize_string - tokeniza una cadena basándose en espacios
+ * @input: cadena de entrada
+ * Return: array de tokens
+ */
 char **tokenize_string(const char *input)
 {
 	size_t tokens_size = 16;
@@ -38,13 +62,7 @@ char **tokenize_string(const char *input)
 	{
 		if (tokens_count >= tokens_size)
 		{
-			tokens_size *= 2;
-			tokens = (char **)realloc(tokens, tokens_size * sizeof(char *));
-			if (!tokens)
-			{
-				perror("realloc");
-				exit(EXIT_FAILURE);
-			}
+			resize_tokens_array(&tokens, &tokens_size);
 		}
 
 		tokens[tokens_count] = strdup(token);
