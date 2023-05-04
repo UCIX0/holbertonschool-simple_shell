@@ -13,10 +13,21 @@
 #include <errno.h>
 
 #define BUFFER_SIZE 1024
+
 extern char **environ;
 
-
-typedef struct
+/**
+ * struct TokenizedInputPIPE - estructura para almacenar comandos
+ *  y delimitadores (&& ; ||)
+ * @commands: arreglo de cadenas de caracteres con los comandos
+ * @delimiters: arreglo de cadenas de caracteres con los delimitadores(&& ; ||)
+ * @num_commands: número de comandos en el arreglo 'commands'
+ * @num_delimiters: número de delimitadores en el arreglo 'delimitadores'
+ * La estructura TokenizedInputPIPE almacena los comandos y delimitadores
+ * de una entrada, junto con la cantidad de comandos y delimitadores
+ * almacenados.
+ */
+typedef struct TokenizedInputPIPE
 {
 	char **commands;
 	char **delimiters;

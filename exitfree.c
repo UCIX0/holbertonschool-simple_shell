@@ -1,5 +1,12 @@
 #include "main.h"
-
+/**
+ * free_tokenized_input_pipe - libera la memoria asignada a una estructura
+ * TokenizedInputPIPE
+ * @input: puntero a la estructura TokenizedInputPIPE
+ *
+ * La función libera la memoria asignada a los arreglos 'commands' y
+ * 'delimiters' y sus elementos dentro de la estructura TokenizedInputPIPE.
+ */
 void free_tokenized_input_pipe(TokenizedInputPIPE *input)
 {
 	int i;
@@ -16,7 +23,14 @@ void free_tokenized_input_pipe(TokenizedInputPIPE *input)
 	}
 	free(input->delimiters);
 }
-
+/**
+ * free_double_pointer - libera la memoria asignada a un arreglo de punteros
+ * @ptr: puntero al arreglo de punteros
+ * @count: número de elementos en el arreglo
+ *
+ * La función libera la memoria asignada a los elementos del arreglo y al
+ * arreglo en sí mismo.
+ */
 void free_double_pointer(char **ptr, int count)
 {
 	int i;
@@ -26,9 +40,4 @@ void free_double_pointer(char **ptr, int count)
 		free(ptr[i]);
 	}
 	free(ptr);
-}
-
-void myexit(int extnum)
-{
-	exit(extnum);
 }
