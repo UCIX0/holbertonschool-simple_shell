@@ -36,17 +36,16 @@ char *get_environment_variable(char **env_copy, const char *var)
 
 /**
  * print_environment - Imprime el entorno actual
- * @env: puntero al arreglo de cadenas que representa el entorno
  *
  * Esta función imprime todas las variables de entorno del arreglo de cadenas
  * proporcionado, que representa el entorno actual.
  */
-void print_environment(char **env)
+void print_environment(void)
 {
-	size_t i;
+	int i;
 
-	for (i = 0; env[i] != NULL; i++)
+	for (i = 0; environ[i] != NULL; i++)
 	{
-		printf("%s\n", env[i]);
+		printf("%s\n", environ[i]);
 	}
 }

@@ -18,8 +18,9 @@ int execute(char *commandu, char **paths, int mode, char *arg0)
 {
 	char **cmmdunittokens;
 	int status;
-	char *command_path;
+	char *command_path = NULL;
 	int countelements;
+	int statusb = 0;
 
 	cmmdunittokens = tokenize_string(commandu);
 	if (cmmdunittokens[0] == NULL)
@@ -27,7 +28,17 @@ int execute(char *commandu, char **paths, int mode, char *arg0)
 		free_double_pointer(cmmdunittokens, count_elements(cmmdunittokens));
 		return (-1);
 	}
-	command_path = find_executable(cmmdunittokens[0], paths, mode, arg0);
+	if (strcmp(cmmdunittokens[0], "exit") == 0)
+	{
+		exit(atoi(cmmdunittokens[1]));
+		free_double_pointer(cmmdunittokens, count_elements(cmmdunittokens));
+		free(command_path);
+	}
+	statusb = execve_builtin(cmmdunittokens);
+	if (statusb == -1)
+	{
+		command_path = find_executable(cmmdunittokens[0], paths, mode, arg0);
+	}
 	countelements = count_elements(cmmdunittokens);
 	if (command_path != NULL)
 	{

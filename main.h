@@ -55,7 +55,7 @@ char **copy_environment(char **env, size_t env_size);
 
 int my_setenv(char ***env, const char *var, const char *value);
 int my_unsetenv(char ***env, const char *var);
-void print_environment(char **env);
+void print_environment();
 
 
 char *get_path_variable(char **env_copy);
@@ -81,4 +81,7 @@ int execute_with_args(const char *path, char **args, int count);
 
 void free_tokenized_input_pipe(TokenizedInputPIPE *input);
 void free_double_pointer(char **ptr, int count);
+
+int execve_builtin (char **cmmdunittokens);
+int my_cd(const char *path);
 #endif
