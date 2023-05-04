@@ -37,7 +37,6 @@ void proces_cmmd_noi(TokenizedInputPIPE *commandunit, char **paths, char *arg0)
 void prepare_process_input_noi(char *input, char **paths, char *arg0)
 {
 	TokenizedInputPIPE commandunit;
-	char **exit_cmmd;
 
 	remove_comments(input);
 	if (input[0] == '\0')
@@ -46,24 +45,54 @@ void prepare_process_input_noi(char *input, char **paths, char *arg0)
 		return;
 	}
 	commandunit = tokenize_inputpipe(input);
-	exit_cmmd = tokenize_string(commandunit.commands[0]);
-	if (strcmp(exit_cmmd[0], "exit") == 0)
-	{
-		if (exit_cmmd[1] == NULL)
-		{
-			free_tokenized_input_pipe(&commandunit);
-			free(input);
-			exit(0);
-		}
-				free_tokenized_input_pipe(&commandunit);
-				free(input);
-				exit(atoi(exit_cmmd[1]));
-	}
 
 	proces_cmmd_noi(&commandunit, paths, arg0);
 
 	free_tokenized_input_pipe(&commandunit);
 	free(input);
+}
+
+
+/**
+ * prepare_and_execute - prepara y ejecuta un comando de entrada
+ * @input: cadena de entrada que contiene el comando a ejecutar
+ * @paths: lista de rutas de directorios que contiene la variable
+ * de entorno PATH
+ * @arg0: nombre de la shell, usado para imprimir el error
+ * Return: número de salida si se ejecuta el comando 'exit',
+ * -1 en caso contrario
+*/
+int prepare_and_execute(char *input, char **paths, char *arg0)
+{
+	char **exitmd;
+	int ex;
+
+	exitmd = tokenize_string(input);
+	if (strcmp(exitmd[0], "exit") == 0)
+	{
+		if (exitmd[1] == NULL)
+		{
+			ex = EXIT_SUCCESS;
+		}
+		else
+		{
+			ex = atoi(exitmd[1]);
+		}
+		free_double_pointer(exitmd, count_elements(exitmd));
+		return (ex);
+	}
+	if (input[0] != '\0')
+	{
+		free_double_pointer(exitmd, count_elements(exitmd));
+		prepare_process_input_noi(input, paths, arg0);
+	}
+	else
+	{
+		free(input);
+		free_double_pointer(exitmd, count_elements(exitmd));
+	}
+
+	return (-1);
 }
 
 /**
@@ -75,41 +104,24 @@ int main_non_interactive(char *arg0)
 {
 	char *input, *path_value;
 	char **env_copy = get_environment_copy();
-	char **paths, **exitmd;
-	int ex;
+	char **paths;
+	int exit_code;
 
 	path_value = get_path_variable(env_copy);
 	paths = tokenize_path(path_value);
 
 	while ((input = read_input()) != NULL)
 	{
-		exitmd = tokenize_string(input);
-		if (strcmp(exitmd[0], "exit") == 0)
+		exit_co(input, paths, arg0);
+		if (exit_code != -1)
 		{
-			if (exitmd[1] == NULL)
-			{
-				free_double_pointer(env_copy, count_elements(env_copy));
-				free_double_pointer(paths, count_elements(paths));
-				free(input);
-				free_double_pointer(exitmd, count_elements(exitmd));
-				exit(EXIT_SUCCESS);
-			}
-			ex = atoi(exitmd[1]);
 			free_double_pointer(env_copy, count_elements(env_copy));
 			free_double_pointer(paths, count_elements(paths));
-			free_double_pointer(exitmd, count_elements(exitmd));
 			free(input);
-			exit(ex);
-		}
-		if (input[0] != '\0')
-		{
-			prepare_process_input_noi(input, paths, arg0);
-		}
-		else
-		{
-			free(input);
+			exit(exit_code);
 		}
 	}
+
 	free_double_pointer(env_copy, count_elements(env_copy));
 	free_double_pointer(paths, count_elements(paths));
 	return (0);

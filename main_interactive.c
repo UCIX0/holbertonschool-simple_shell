@@ -105,6 +105,7 @@ int main_interactive(void)
 		{
 			prepare_and_process_input(input);
 		}
+		free_double_pointer(exitmd, count_elements(exitmd));
 		free(input);
 	}
 	return (0);
