@@ -37,11 +37,26 @@ void prepare_and_process_input(char *input)
 	char **env_copy = get_environment_copy();
 	char *path_value;
 	char **paths;
+	char **exit_cmmd;
 
 	path_value = get_path_variable(env_copy);
 	paths = tokenize_path(path_value);
 	commandunit = tokenize_inputpipe(input);
-
+	exit_cmmd = tokenize_string(commandunit.commands[0]);
+	if (strcmp(exit_cmmd[0], "exit") == 0)
+	{
+		if (exit_cmmd[1] == NULL)
+		{
+			free_tokenized_input_pipe(&commandunit);
+			free_double_pointer(env_copy, count_elements(env_copy));
+			free_double_pointer(paths, count_elements(paths));
+			exit(0);
+		}
+			free_tokenized_input_pipe(&commandunit);
+			free_double_pointer(env_copy, count_elements(env_copy));
+			free_double_pointer(paths, count_elements(paths));
+			exit(atoi(exit_cmmd[1]));
+	}
 	procescmmd(&commandunit, paths);
 
 	free_tokenized_input_pipe(&commandunit);
