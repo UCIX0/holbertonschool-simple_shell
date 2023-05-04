@@ -22,6 +22,5 @@ char *get_path_variable(char **env_copy)
 			return (env_copy[i] + 5);
 		}
 	}
-	fprintf(stderr, "PATH variable not found, setting default.\n");
 	return ("/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin");
 }
