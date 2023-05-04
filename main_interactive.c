@@ -50,11 +50,13 @@ void prepare_and_process_input(char *input)
 			free_tokenized_input_pipe(&commandunit);
 			free_double_pointer(env_copy, count_elements(env_copy));
 			free_double_pointer(paths, count_elements(paths));
+			free(input);
 			exit(0);
 		}
 			free_tokenized_input_pipe(&commandunit);
 			free_double_pointer(env_copy, count_elements(env_copy));
 			free_double_pointer(paths, count_elements(paths));
+			free(input);
 			exit(atoi(exit_cmmd[1]));
 	}
 	procescmmd(&commandunit, paths);
@@ -75,8 +77,25 @@ int main_interactive(void)
 	setup_signal_handlers();
 	while (1)
 	{
+		char **exitmd;
+		int ex;
+
 		print_prompt();
 		input = read_input();
+		exitmd = tokenize_string(input);
+		if (strcmp(exitmd[0], "exit") == 0)
+		{
+			if (exitmd[1] == NULL)
+			{
+				free_double_pointer(exitmd, count_elements(exitmd));
+				free(input);
+				exit(EXIT_SUCCESS);
+			}
+			ex = atoi(exitmd[1]);
+			free_double_pointer(exitmd, count_elements(exitmd));
+			free(input);
+			exit(ex);
+		}
 		if (!input)
 		{
 			exit(EXIT_SUCCESS);

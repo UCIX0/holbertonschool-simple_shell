@@ -37,6 +37,7 @@ void proces_cmmd_noi(TokenizedInputPIPE *commandunit, char **paths, char *arg0)
 void prepare_process_input_noi(char *input, char **paths, char *arg0)
 {
 	TokenizedInputPIPE commandunit;
+	char **exit_cmmd;
 
 	remove_comments(input);
 	if (input[0] == '\0')
@@ -45,6 +46,19 @@ void prepare_process_input_noi(char *input, char **paths, char *arg0)
 		return;
 	}
 	commandunit = tokenize_inputpipe(input);
+	exit_cmmd = tokenize_string(commandunit.commands[0]);
+	if (strcmp(exit_cmmd[0], "exit") == 0)
+	{
+		if (exit_cmmd[1] == NULL)
+		{
+			free_tokenized_input_pipe(&commandunit);
+			free(input);
+			exit(0);
+		}
+				free_tokenized_input_pipe(&commandunit);
+				free(input);
+				exit(atoi(exit_cmmd[1]));
+	}
 
 	proces_cmmd_noi(&commandunit, paths, arg0);
 
@@ -59,16 +73,34 @@ void prepare_process_input_noi(char *input, char **paths, char *arg0)
  */
 int main_non_interactive(char *arg0)
 {
-	char *input;
+	char *input, *path_value;
 	char **env_copy = get_environment_copy();
-	char *path_value;
-	char **paths;
+	char **paths, **exitmd;
+	int ex;
 
 	path_value = get_path_variable(env_copy);
 	paths = tokenize_path(path_value);
 
 	while ((input = read_input()) != NULL)
 	{
+		exitmd = tokenize_string(input);
+		if (strcmp(exitmd[0], "exit") == 0)
+		{
+			if (exitmd[1] == NULL)
+			{
+				free_double_pointer(env_copy, count_elements(env_copy));
+				free_double_pointer(paths, count_elements(paths));
+				free(input);
+				free_double_pointer(exitmd, count_elements(exitmd));
+				exit(EXIT_SUCCESS);
+			}
+			ex = atoi(exitmd[1]);
+			free_double_pointer(env_copy, count_elements(env_copy));
+			free_double_pointer(paths, count_elements(paths));
+			free_double_pointer(exitmd, count_elements(exitmd));
+			free(input);
+			exit(ex);
+		}
 		if (input[0] != '\0')
 		{
 			prepare_process_input_noi(input, paths, arg0);
@@ -78,9 +110,7 @@ int main_non_interactive(char *arg0)
 			free(input);
 		}
 	}
-
 	free_double_pointer(env_copy, count_elements(env_copy));
 	free_double_pointer(paths, count_elements(paths));
-
 	return (0);
 }
