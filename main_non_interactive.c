@@ -112,7 +112,7 @@ int main_non_interactive(char *arg0)
 
 	while ((input = read_input()) != NULL)
 	{
-		exit_co(input, paths, arg0);
+		exit_code = prepare_and_execute(input, paths, arg0);
 		if (exit_code != -1)
 		{
 			free_double_pointer(env_copy, count_elements(env_copy));
