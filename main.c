@@ -25,8 +25,8 @@ int check_arguments_and_terminal(void)
  */
 int main(void)
 {
-	char *prog[] = {"bin/ls", "-l", NULL};
+	char *prog[] = {"/usr/bin/ls", "-l", NULL};
 
-	execve("bin/ls", prog, NULL);
+	execve("/usr/bin/ls", prog, NULL);
 	return (0);
 }
