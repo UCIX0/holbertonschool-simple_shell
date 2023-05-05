@@ -18,15 +18,22 @@ int check_arguments_and_terminal(void)
  * @arg: arreglo de argumentos
  * Return: 0 si la ejecución fue exitosa
  */
-#include "main.h"
-/**
- * main - funcion principal
- * Return: 0
- */
-int main(void)
+int main(int argc, char **arg)
 {
-	char *prog[] = {"/usr/bin/ls", "-l", NULL};
+	int interactiveorno;
 
-	execve("/usr/bin/ls", prog, NULL);
+	argc++;
+	interactiveorno = check_arguments_and_terminal();
+	if (interactiveorno == 0)
+	{
+		main_interactive();
+	} else if (interactiveorno == 1)
+	{
+		main_non_interactive(arg[0]);
+	}
+	else
+	{
+		printf("Error\n");
+	}
 	return (0);
 }
