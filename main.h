@@ -84,4 +84,5 @@ void free_double_pointer(char **ptr, int count);
 
 int execve_builtin(char **cmmdunittokens);
 int my_cd(const char *path);
+char* concatenarStrings(char** doblePuntero);
 #endif
