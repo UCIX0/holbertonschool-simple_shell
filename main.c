@@ -21,10 +21,7 @@ int main(int argc, char **argv)
 				exit(126);
 			if (errno == ENOENT)
 			{
-				fputs(argv[0], stderr);
-				fputs(": 0: Can't open ", stderr);
-				fputs(argv[1], stderr);
-				fputc('\n', stderr);
+				fprintf(stderr, "%s: 0: Can't open %s\n", argv[0], argv[1]);
 				exit(127);
 			}
 			return (EXIT_FAILURE);
