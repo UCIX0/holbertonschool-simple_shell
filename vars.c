@@ -8,7 +8,7 @@
  *
  * Return: 1 if chain delimeter, 0 otherwise
  */
-int is_chain(info_t *info, char *buf, size_t *p)
+int is_chain(shell_info *info, char *buf, size_t *p)
 {
 	size_t j = *p;
 
@@ -16,18 +16,18 @@ int is_chain(info_t *info, char *buf, size_t *p)
 	{
 		buf[j] = 0;
 		j++;
-		info->cmd_buf_type = CMD_OR;
+		info->cmd_chain_type = CMD_OR;
 	}
 	else if (buf[j] == '&' && buf[j + 1] == '&')
 	{
 		buf[j] = 0;
 		j++;
-		info->cmd_buf_type = CMD_AND;
+		info->cmd_chain_type = CMD_AND;
 	}
 	else if (buf[j] == ';') /* found end of this command */
 	{
 		buf[j] = 0; /* replace semicolon with null */
-		info->cmd_buf_type = CMD_CHAIN;
+		info->cmd_chain_type = CMD_CHAIN;
 	}
 	else
 		return (0);
@@ -45,21 +45,21 @@ int is_chain(info_t *info, char *buf, size_t *p)
  *
  * Return: Void
  */
-void check_chain(info_t *info, char *buf, size_t *p, size_t i, size_t len)
+void check_chain(shell_info *info, char *buf, size_t *p, size_t i, size_t len)
 {
 	size_t j = *p;
 
-	if (info->cmd_buf_type == CMD_AND)
+	if (info->cmd_chain_type == CMD_AND)
 	{
-		if (info->status)
+		if (info->last_status)
 		{
 			buf[i] = 0;
 			j = len;
 		}
 	}
-	if (info->cmd_buf_type == CMD_OR)
+	if (info->cmd_chain_type == CMD_OR)
 	{
-		if (!info->status)
+		if (!info->last_status)
 		{
 			buf[i] = 0;
 			j = len;
@@ -75,10 +75,10 @@ void check_chain(info_t *info, char *buf, size_t *p, size_t i, size_t len)
  *
  * Return: 1 if replaced, 0 otherwise
  */
-int replace_alias(info_t *info)
+int replace_alias(shell_info *info)
 {
 	int i;
-	list_t *node;
+	list_node *node;
 	char *p;
 
 	for (i = 0; i < 10; i++)
@@ -87,7 +87,7 @@ int replace_alias(info_t *info)
 		if (!node)
 			return (0);
 		free(info->argv[0]);
-		p = _strchr(node->str, '=');
+		p = _strchr(node->data, '=');
 		if (!p)
 			return (0);
 		p = _strdup(p + 1);
@@ -104,10 +104,10 @@ int replace_alias(info_t *info)
  *
  * Return: 1 if replaced, 0 otherwise
  */
-int replace_vars(info_t *info)
+int replace_vars(shell_info *info)
 {
 	int i = 0;
-	list_t *node;
+	list_node *node;
 
 	for (i = 0; info->argv[i]; i++)
 	{
@@ -117,7 +117,7 @@ int replace_vars(info_t *info)
 		if (!_strcmp(info->argv[i], "$?"))
 		{
 			replace_string(&(info->argv[i]),
-				_strdup(convert_number(info->status, 10, 0)));
+				_strdup(convert_number(info->last_status, 10, 0)));
 			continue;
 		}
 		if (!_strcmp(info->argv[i], "$$"))
@@ -130,7 +130,7 @@ int replace_vars(info_t *info)
 		if (node)
 		{
 			replace_string(&(info->argv[i]),
-				_strdup(_strchr(node->str, '=') + 1));
+				_strdup(_strchr(node->data, '=') + 1));
 			continue;
 		}
 		replace_string(&info->argv[i], _strdup(""));

@@ -35,11 +35,11 @@ int _erratoi(char *s)
  * Return: 0 if no numbers in string, converted number otherwise
  *        -1 on error
  */
-void print_error(info_t *info, char *estr)
+void print_error(shell_info *info, char *estr)
 {
-	_eputs(info->fname);
+	_eputs(info->program_name);
 	_eputs(": ");
-	print_d(info->line_count, STDERR_FILENO);
+	print_d(info->input_line_count, STDERR_FILENO);
 	_eputs(": ");
 	_eputs(info->argv[0]);
 	_eputs(": ");

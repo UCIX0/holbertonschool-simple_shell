@@ -6,15 +6,15 @@
  *          constant function prototype.
  * Return: Always 0
  */
-char **get_environ(info_t *info)
+char **get_environ(shell_info *info)
 {
-	if (!info->environ || info->env_changed)
+	if (!info->custom_environ || info->env_modified)
 	{
-		info->environ = list_to_strings(info->env);
-		info->env_changed = 0;
+		info->custom_environ = list_to_strings(info->env);
+		info->env_modified = 0;
 	}
 
-	return (info->environ);
+	return (info->custom_environ);
 }
 
 /**
@@ -24,9 +24,9 @@ char **get_environ(info_t *info)
  *  Return: 1 on delete, 0 otherwise
  * @var: the string env var property
  */
-int _unsetenv(info_t *info, char *var)
+int _unsetenv(shell_info *info, char *var)
 {
-	list_t *node = info->env;
+	list_node *node = info->env;
 	size_t i = 0;
 	char *p;
 
@@ -35,10 +35,10 @@ int _unsetenv(info_t *info, char *var)
 
 	while (node)
 	{
-		p = starts_with(node->str, var);
+		p = starts_with(node->data, var);
 		if (p && *p == '=')
 		{
-			info->env_changed = delete_node_at_index(&(info->env), i);
+			info->env_modified = delete_node_at_index(&(info->env), i);
 			i = 0;
 			node = info->env;
 			continue;
@@ -46,7 +46,7 @@ int _unsetenv(info_t *info, char *var)
 		node = node->next;
 		i++;
 	}
-	return (info->env_changed);
+	return (info->env_modified);
 }
 
 /**
@@ -58,10 +58,10 @@ int _unsetenv(info_t *info, char *var)
  * @value: the string env var value
  *  Return: Always 0
  */
-int _setenv(info_t *info, char *var, char *value)
+int _setenv(shell_info *info, char *var, char *value)
 {
 	char *buf = NULL;
-	list_t *node;
+	list_node *node;
 	char *p;
 
 	if (!var || !value)
@@ -76,18 +76,18 @@ int _setenv(info_t *info, char *var, char *value)
 	node = info->env;
 	while (node)
 	{
-		p = starts_with(node->str, var);
+		p = starts_with(node->data, var);
 		if (p && *p == '=')
 		{
-			free(node->str);
-			node->str = buf;
-			info->env_changed = 1;
+			free(node->data);
+			node->data = buf;
+			info->env_modified = 1;
 			return (0);
 		}
 		node = node->next;
 	}
 	add_node_end(&(info->env), buf, 0);
 	free(buf);
-	info->env_changed = 1;
+	info->env_modified = 1;
 	return (0);
 }

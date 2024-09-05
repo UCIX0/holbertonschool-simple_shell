@@ -7,7 +7,7 @@
  *        constant function prototype.
  *  Return: Always 0
  */
-int _myhistory(info_t *info)
+int _myhistory(shell_info *info)
 {
 	print_list(info->history);
 	return (0);
@@ -20,7 +20,7 @@ int _myhistory(info_t *info)
  *
  * Return: Always 0 on success, 1 on error
  */
-int unset_alias(info_t *info, char *str)
+int unset_alias(shell_info *info, char *str)
 {
 	char *p, c;
 	int ret;
@@ -43,7 +43,7 @@ int unset_alias(info_t *info, char *str)
  *
  * Return: Always 0 on success, 1 on error
  */
-int set_alias(info_t *info, char *str)
+int set_alias(shell_info *info, char *str)
 {
 	char *p;
 
@@ -63,14 +63,14 @@ int set_alias(info_t *info, char *str)
  *
  * Return: Always 0 on success, 1 on error
  */
-int print_alias(list_t *node)
+int print_alias(list_node *node)
 {
 	char *p = NULL, *a = NULL;
 
 	if (node)
 	{
-		p = _strchr(node->str, '=');
-		for (a = node->str; a <= p; a++)
+		p = _strchr(node->data, '=');
+		for (a = node->data; a <= p; a++)
 			_putchar(*a);
 		_putchar('\'');
 		_puts(p + 1);
@@ -86,11 +86,11 @@ int print_alias(list_t *node)
  *          constant function prototype.
  *  Return: Always 0
  */
-int _myalias(info_t *info)
+int _myalias(shell_info *info)
 {
 	int i = 0;
 	char *p = NULL;
-	list_t *node = NULL;
+	list_node *node = NULL;
 
 	if (info->argc == 1)
 	{

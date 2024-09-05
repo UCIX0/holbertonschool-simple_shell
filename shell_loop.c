@@ -7,7 +7,7 @@
  *
  * Return: 0 on success, 1 on error, or error code
  */
-int hsh(info_t *info, char **av)
+int hsh(shell_info *info, char **av)
 {
 	ssize_t r = 0;
 	int builtin_ret = 0;
@@ -32,13 +32,13 @@ int hsh(info_t *info, char **av)
 	}
 	write_history(info);
 	free_info(info, 1);
-	if (!interactive(info) && info->status)
-		exit(info->status);
+	if (!interactive(info) && info->last_status)
+		exit(info->last_status);
 	if (builtin_ret == -2)
 	{
-		if (info->err_num == -1)
-			exit(info->status);
-		exit(info->err_num);
+		if (info->error_code == -1)
+			exit(info->last_status);
+		exit(info->error_code);
 	}
 	return (builtin_ret);
 }
@@ -52,7 +52,7 @@ int hsh(info_t *info, char **av)
  *			1 if builtin found but not successful,
  *			-2 if builtin signals exit()
  */
-int find_builtin(info_t *info)
+int find_builtin(shell_info *info)
 {
 	int i, built_in_ret = -1;
 	builtin_table builtintbl[] = {
@@ -70,7 +70,7 @@ int find_builtin(info_t *info)
 	for (i = 0; builtintbl[i].type; i++)
 		if (_strcmp(info->argv[0], builtintbl[i].type) == 0)
 		{
-			info->line_count++;
+			info->input_line_count++;
 			built_in_ret = builtintbl[i].func(info);
 			break;
 		}
@@ -83,19 +83,19 @@ int find_builtin(info_t *info)
  *
  * Return: void
  */
-void find_cmd(info_t *info)
+void find_cmd(shell_info *info)
 {
 	char *path = NULL;
 	int i, k;
 
 	info->path = info->argv[0];
-	if (info->linecount_flag == 1)
+	if (info->count_current_line == 1)
 	{
-		info->line_count++;
-		info->linecount_flag = 0;
+		info->input_line_count++;
+		info->count_current_line = 0;
 	}
-	for (i = 0, k = 0; info->arg[i]; i++)
-		if (!is_delim(info->arg[i], " \t\n"))
+	for (i = 0, k = 0; info->input_line[i]; i++)
+		if (!is_delim(info->input_line[i], " \t\n"))
 			k++;
 	if (!k)
 		return;
@@ -111,9 +111,9 @@ void find_cmd(info_t *info)
 		if ((interactive(info) || _getenv(info, "PATH=")
 			|| info->argv[0][0] == '/') && is_cmd(info, info->argv[0]))
 			fork_cmd(info);
-		else if (*(info->arg) != '\n')
+		else if (*(info->input_line) != '\n')
 		{
-			info->status = 127;
+			info->last_status = 127;
 			print_error(info, "not found\n");
 		}
 	}
@@ -125,7 +125,7 @@ void find_cmd(info_t *info)
  *
  * Return: void
  */
-void fork_cmd(info_t *info)
+void fork_cmd(shell_info *info)
 {
 	pid_t child_pid;
 
@@ -149,11 +149,11 @@ void fork_cmd(info_t *info)
 	}
 	else
 	{
-		wait(&(info->status));
-		if (WIFEXITED(info->status))
+		wait(&(info->last_status));
+		if (WIFEXITED(info->last_status))
 		{
-			info->status = WEXITSTATUS(info->status);
-			if (info->status == 126)
+			info->last_status = WEXITSTATUS(info->last_status);
+			if (info->last_status == 126)
 				print_error(info, "Permission denied\n");
 		}
 	}
