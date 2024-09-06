@@ -52,17 +52,20 @@ list_node *add_node_end(list_node **head, const char *data, int index)
 	new_node = malloc(sizeof(list_node));
 	if (!new_node)
 		return (NULL);
-	_memset((void *)new_node, 0, sizeof(list_node));
+
+	memset((void *)new_node, 0, sizeof(list_node));
+
 	new_node->index = index;
 	if (data)
 	{
-		new_node->data = _strdup(data);
+		new_node->data = strdup(data);
 		if (!new_node->data)
 		{
 			free(new_node);
 			return (NULL);
 		}
 	}
+
 	if (node)
 	{
 		while (node->next)
@@ -71,6 +74,7 @@ list_node *add_node_end(list_node **head, const char *data, int index)
 	}
 	else
 		*head = new_node;
+
 	return (new_node);
 }
 

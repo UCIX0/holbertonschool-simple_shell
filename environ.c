@@ -76,17 +76,17 @@ int _myunsetenv(shell_info *info)
 
 /**
  * populate_env_list - populates env linked list
- * @info: Structure containing potential arguments. Used to maintain
+ * @info_shell: Structure containing potential arguments. Used to maintain
  *          constant function prototype.
  * Return: Always 0
  */
-int populate_env_list(shell_info *info)
+int populate_env_list(shell_info *info_shell)
 {
 	list_node *node = NULL;
 	size_t i;
 
 	for (i = 0; environ[i]; i++)
 		add_node_end(&node, environ[i], 0);
-	info->env = node;
+	info_shell->env = node;
 	return (0);
 }

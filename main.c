@@ -9,7 +9,7 @@
  */
 int main(int argc, char **argv)
 {
-	shell_info info[] = { SHELL_INFO_INIT };
+	shell_info info_shell[] = { SHELL_INFO_INIT };
 	int file_descriptor = STDIN_FILENO;
 
 	if (argc == 2)
@@ -26,10 +26,10 @@ int main(int argc, char **argv)
 			}
 			return (EXIT_FAILURE);
 		}
-		info->input_fd = file_descriptor;
+		info_shell->input_fd = file_descriptor;
 	}
-	populate_env_list(info);
-	read_history(info);
-	hsh(info, argv);
+	populate_env_list(info_shell);
+	read_history(info_shell);
+	hsh(info_shell, argv);
 	return (EXIT_SUCCESS);
 }
