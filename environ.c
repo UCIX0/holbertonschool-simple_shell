@@ -13,23 +13,23 @@ int _myenv(shell_info *info)
 }
 
 /**
- * _getenv - gets the value of an environ variable
- * @info: Structure containing potential arguments. Used to maintain
- * @name: env var name
+ * get_env_value - gets the value of an environ variable
+ * @info_shell: Structure containing potential arguments. Used to maintain
+ * @var_name: env var name
  *
  * Return: the value
  */
-char *_getenv(shell_info *info, const char *name)
+char *get_env_value(shell_info *info_shell, const char *var_name)
 {
-	list_node *node = info->env;
-	char *p;
+	list_node *env_node = info_shell->env;
+	char *var_value;
 
-	while (node)
+	while (env_node)
 	{
-		p = starts_with(node->data, name);
-		if (p && *p)
-			return (p);
-		node = node->next;
+		var_value = find_substring(env_node->data, var_name);
+		if (var_value && *var_value)
+			return (var_value);
+		env_node = env_node->next;
 	}
 	return (NULL);
 }

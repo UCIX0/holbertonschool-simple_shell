@@ -2,25 +2,26 @@
 
 /**
  * get_history_file - gets the history file
- * @info: parameter struct
+ * @info_shell: parameter struct
  *
  * Return: allocated string containg history file
  */
 
-char *get_history_file(shell_info *info)
+char *get_history_file(shell_info *info_shell)
 {
 	char *buf, *dir;
+	char *hist_file = ".simple_shell_history";
 
-	dir = _getenv(info, "HOME=");
+	dir = get_env_value(info_shell, "HOME=");
 	if (!dir)
 		return (NULL);
-	buf = malloc(sizeof(char) * (_strlen(dir) + _strlen(HIST_FILE) + 2));
+	buf = malloc(sizeof(char) * (strlen(dir) + strlen(hist_file) + 2));
 	if (!buf)
 		return (NULL);
 	buf[0] = 0;
-	_strcpy(buf, dir);
-	_strcat(buf, "/");
-	_strcat(buf, HIST_FILE);
+	strcpy(buf, dir);
+	strcat(buf, "/");
+	strcat(buf, hist_file);
 	return (buf);
 }
 
@@ -55,16 +56,16 @@ int write_history(shell_info *info)
 
 /**
  * read_history - reads history from file
- * @info: the parameter struct
+ * @info_shell: the parameter struct
  *
  * Return: history_count on success, 0 otherwise
  */
-int read_history(shell_info *info)
+int read_history(shell_info *info_shell)
 {
 	int i, last = 0, linecount = 0;
 	ssize_t fd, rdlen, fsize = 0;
 	struct stat st;
-	char *buf = NULL, *filename = get_history_file(info);
+	char *buf = NULL, *filename = get_history_file(info_shell);
 
 	if (!filename)
 		return (0);
@@ -89,17 +90,17 @@ int read_history(shell_info *info)
 		if (buf[i] == '\n')
 		{
 			buf[i] = 0;
-			build_history_list(info, buf + last, linecount++);
+			build_history_list(info_shell, buf + last, linecount++);
 			last = i + 1;
 		}
 	if (last != i)
-		build_history_list(info, buf + last, linecount++);
+		build_history_list(info_shell, buf + last, linecount++);
 	free(buf);
-	info->history_count = linecount;
-	while (info->history_count-- >= HIST_MAX)
-		delete_node_at_index(&(info->history), 0);
-	renumber_history(info);
-	return (info->history_count);
+	info_shell->history_count = linecount;
+	while (info_shell->history_count-- >= HIST_MAX)
+		delete_node_at_index(&(info_shell->history), 0);
+	renumber_history(info_shell);
+	return (info_shell->history_count);
 }
 
 /**

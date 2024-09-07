@@ -162,7 +162,7 @@ int _putsfd(char *str, int fd);
 /* toem_string.c */
 int _strlen(char *);
 int _strcmp(char *, char *);
-char *starts_with(const char *, const char *);
+char *find_substring(const char *, const char *);
 char *_strcat(char *, char *);
 
 /* toem_string1.c */
@@ -221,7 +221,7 @@ void set_info(shell_info *, char **);
 void free_info(shell_info *, int);
 
 /* toem_environ.c */
-char *_getenv(shell_info *, const char *);
+char *get_env_value(shell_info *, const char *);
 int _myenv(shell_info *);
 int _mysetenv(shell_info *);
 int _myunsetenv(shell_info *);

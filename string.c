@@ -41,18 +41,27 @@ int _strcmp(char *s1, char *s2)
 }
 
 /**
- * starts_with - checks if needle starts with haystack
- * @haystack: string to search
- * @needle: the substring to find
+ * find_substring - Searches for a substring in a main string.
+ * @str: The main string in which the search will be performed.
+ * @substr: The substring to be found at the beginning of the main string.
  *
- * Return: address of next char of haystack or NULL
+ * Return: A pointer to the position after the found substring
+ * in the main string, or NULL if the substring is not found at the beginning.
  */
-char *starts_with(const char *haystack, const char *needle)
+char *find_substring(const char *str, const char *substr)
 {
-	while (*needle)
-		if (*needle++ != *haystack++)
-			return (NULL);
-	return ((char *)haystack);
+	while (*str && *substr && *str == *substr)
+	{
+		str++;
+		substr++;
+	}
+
+	if (*substr == '\0')
+	{
+		return ((char *)str);
+	}
+
+	return (NULL);
 }
 
 /**

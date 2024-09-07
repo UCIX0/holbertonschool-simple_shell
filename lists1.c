@@ -92,7 +92,7 @@ list_node *node_starts_with(list_node *node, char *prefix, char c)
 
 	while (node)
 	{
-		p = starts_with(node->data, prefix);
+		p = find_substring(node->data, prefix);
 		if (p && ((c == -1) || (*p == c)))
 			return (node);
 		node = node->next;

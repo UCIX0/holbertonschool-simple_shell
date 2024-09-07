@@ -35,7 +35,7 @@ int _unsetenv(shell_info *info, char *var)
 
 	while (node)
 	{
-		p = starts_with(node->data, var);
+		p = find_substring(node->data, var);
 		if (p && *p == '=')
 		{
 			info->env_modified = delete_node_at_index(&(info->env), i);
@@ -76,7 +76,7 @@ int _setenv(shell_info *info, char *var, char *value)
 	node = info->env;
 	while (node)
 	{
-		p = starts_with(node->data, var);
+		p = find_substring(node->data, var);
 		if (p && *p == '=')
 		{
 			free(node->data);
